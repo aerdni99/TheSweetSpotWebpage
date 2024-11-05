@@ -1,0 +1,15 @@
+/*
+    Album.css
+
+    Style sheet for the Photo Album Component
+*/
+
+.wrapper {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+
+  .neonImage {
+    padding: 5px;
+  }
