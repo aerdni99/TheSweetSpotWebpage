@@ -8,10 +8,8 @@
 
 export default function EmbeddedVideo({url, title}) {
     return (
-      <div>
-        <iframe 
-            width="560" 
-            height="315" 
+      <div className="video">
+        <iframe  
             src={url} 
             title={title} 
             frameBorder="0" // This attribute is deprecated, but without it, an ugly white border surrounds my videos

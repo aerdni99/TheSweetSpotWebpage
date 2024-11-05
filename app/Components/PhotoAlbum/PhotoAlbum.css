@@ -11,5 +11,7 @@
   }
 
 .photo {
-    padding: 5px;
+    padding: 0.5vw;
+    width: 19vw;
+    height: 12vw;
 }

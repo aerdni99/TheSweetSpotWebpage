@@ -12,13 +12,11 @@ import './VideoList.css'
 export default function VideoList() {
     return (
         <div>
-            <h1 className='neonGreenText'>VIDEOS</h1>
-            <div className='wrapper'>
-                <EmbeddedVideo
-                    url={"https://www.youtube.com/embed/fKzQjOUeHYg?si=VT1uGvgaYvNcvTlU"}
-                    title={"Passenger Side"}
-                />
-            </div>
+            <h1 className='neonGreenText title'>VIDEOS</h1>
+            <EmbeddedVideo
+                url={"https://www.youtube.com/embed/fKzQjOUeHYg?si=VT1uGvgaYvNcvTlU"}
+                title={"Passenger Side"}
+            />
         </div>
     )
 }
