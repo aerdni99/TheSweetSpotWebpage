@@ -1,20 +1,14 @@
 // Main page
 
 import LikeButton from './LikeButton';
-import Head from './Head'
+// import Head from './Head';
+import './globals.css';
 
 export default function HomePage() {
     const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
-
-    return (
-        <div>
-          <Head title='Develop. Preview. Ship.'/>
-          <ul>
-              {names.map((name) => (
-                  <li key={name}>{name}</li>
-              ))}
-          </ul>
-          <LikeButton />
-        </div>
-    );
+return (
+    <div>
+        <LikeButton />
+    </div>
+);
 }
