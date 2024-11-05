@@ -1,7 +1,6 @@
 // Main page
 
-import LikeButton from './LikeButton';
-// import Head from './Head';
+import LikeButton from './Components/LikeButton';
 import './globals.css';
 
 export default function HomePage() {
