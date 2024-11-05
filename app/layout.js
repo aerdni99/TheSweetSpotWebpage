@@ -3,8 +3,9 @@
 
     Overall layout of my app
 */
-import './globals.css';
 
+import './globals.css';
+import SocialDirectry from './Components/SocialDirectory.js'
 
 export const metadata = {
   title: 'Next.js',
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-
+        <SocialDirectry />
         {children}
       </body>
     </html>
