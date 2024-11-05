@@ -8,7 +8,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import './social.css';
+import './Socials.css';
 
 export default function SocialButton({path, link, alt}) {
     return (

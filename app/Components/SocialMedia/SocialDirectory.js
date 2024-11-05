@@ -7,7 +7,7 @@
 'use client';
 
 import SocialButton from './SocialButton.js'
-import './social.css'
+import './Socials.css'
 
 export default function SocialDirectory() {
     return (

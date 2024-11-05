@@ -1,0 +1,21 @@
+/*
+    button.css
+
+    Styles for neon outlines of social media buttons
+*/
+
+.neonImage {
+    padding: 20px;
+  }
+
+.navBar {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #212121;
+}
+
+p {
+    color: aliceblue;
+    background-color: turquoise;
+}
