@@ -1,5 +1,8 @@
-// Component for creating social media buttons
+/*
+    SocialDirectory.js
 
+    Component for creating social media buttons
+*/
 'use client';
 
 export default function SocialButton(path, link) {

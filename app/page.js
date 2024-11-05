@@ -1,4 +1,8 @@
-// Main page
+/*
+    page.js
+
+    Main page for the website
+*/
 
 import LikeButton from './Components/LikeButton';
 import './globals.css';

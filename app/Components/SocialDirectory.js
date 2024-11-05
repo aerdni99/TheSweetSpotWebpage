@@ -1,4 +1,8 @@
-// Component for organizing social media buttons
+/*
+    SocialDirectory.js
+
+    Component for organizing social media buttons
+*/
 
 'use client';
 

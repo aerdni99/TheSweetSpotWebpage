@@ -1,5 +1,8 @@
-// Like Button for my page
+/*
+    LikeButton.js
 
+    This is a component from the next.js tutorial, I'm keeping it here for reference a little longer
+*/
 'use client';
 
 import { useState } from 'react';
