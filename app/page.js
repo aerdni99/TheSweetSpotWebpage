@@ -5,13 +5,15 @@
 */
 
 import './globals.css';
-import Album from './Components/PhotoAlbum/Album.js'
+import PhotoAlbum from './Components/PhotoAlbum/PhotoAlbum.js'
+import VideoList from './Components/VideoList/VideoList.js'
 
 export default function HomePage() {
-    
+
     return (
     <div>
-        <Album />
+        <PhotoAlbum />
+        <VideoList/>
     </div>
     );
 }

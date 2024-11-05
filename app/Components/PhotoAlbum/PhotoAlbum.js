@@ -7,9 +7,9 @@
 'use client';
 
 import Image from 'next/image';
-import './Album.css';
+import './PhotoAlbum.css';
 
-export default function Album() {
+export default function PhotoAlbum() {
     const img_paths = ['/band/peek-over.jpg',
         '/band/chalk-clap.jpg',
         '/band/stage-sit.jpg',
@@ -23,35 +23,35 @@ export default function Album() {
                 alt='Band Pictures'
                 width={375}
                 height={250}
-                className='neonImage'
+                className='photo'
             />
             <Image
                 src={img_paths[1]}
                 alt='Band Pictures'
                 width={375}
                 height={250}
-                className='neonImage'
+                className='photo'
             />
             <Image
                 src={img_paths[2]}
                 alt='Band Pictures'
                 width={375}
                 height={250}
-                className='neonImage'
+                className='photo'
             />
             <Image
                 src={img_paths[3]}
                 alt='Band Pictures'
                 width={375}
                 height={250}
-                className='neonImage'
+                className='photo'
             />
             <Image
                 src={img_paths[4]}
                 alt='Band Pictures'
                 width={375}
                 height={250}
-                className='neonImage'
+                className='photo'
             />
         </div>
     );

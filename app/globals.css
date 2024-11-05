@@ -32,3 +32,8 @@ body {
   align-items: center;
   display: flex;
 }
+
+p {
+  color: aliceblue;
+  background-color: turquoise;
+}
