@@ -5,7 +5,7 @@
 */
 
 import './globals.css';
-import SocialDirectry from './Components/SocialDirectory.js'
+import SocialDirectry from './Components/SocialMedia/SocialDirectory.js'
 
 export const metadata = {
   title: 'Next.js',

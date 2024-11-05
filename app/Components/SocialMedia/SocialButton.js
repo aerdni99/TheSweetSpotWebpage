@@ -19,6 +19,7 @@ export default function SocialButton({path, link, alt}) {
               alt={alt}
               width={64}
               height={64}
+              className={StyleSheet.neonImage}
             />
           </Link>
         </div>
