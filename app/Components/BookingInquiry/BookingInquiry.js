@@ -1,0 +1,5 @@
+/*
+    BookingInquiry.css
+
+    Component for band booking inquiries
+*/
