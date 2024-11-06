@@ -5,17 +5,19 @@
 */
 
 'use client';
+import './VideoList.css'
 
 export default function EmbeddedVideo({url, title}) {
     return (
-      <div className="video">
-        <iframe  
-            src={url} 
-            title={title} 
-            frameBorder="0" // This attribute is deprecated, but without it, an ugly white border surrounds my videos
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" 
-            allowfullscreen
+      <div className='wrapper'>
+        <iframe
+          className="video"
+          src={url} 
+          title={title} 
+          frameBorder="0" // This attribute is deprecated, but without it, an ugly white border surrounds my videos
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerPolicy="strict-origin-when-cross-origin" 
+          allowfullscreen
         ></iframe>
       </div>
     );
