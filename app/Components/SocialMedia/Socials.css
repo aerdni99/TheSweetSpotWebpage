@@ -5,7 +5,8 @@
 */
 
 .neonImage {
-    padding: 20px;
+    width: 3vw;
+    height: 3vw;
     transition: transform 0.3s ease;
 }
 

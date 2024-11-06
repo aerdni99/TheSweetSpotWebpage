@@ -12,9 +12,10 @@ import './Socials.css';
 
 export default function SocialButton({path, link, alt}) {
     return (
-        <div className='neonImage'>
+        <div>
           <Link href={link} target="_blank" rel="noopener noreferrer">
             <Image
+              className='neonImage'
               src={path}
               alt={alt}
               width={64}
