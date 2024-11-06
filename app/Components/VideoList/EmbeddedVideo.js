@@ -17,7 +17,7 @@ export default function EmbeddedVideo({url, title}) {
           frameBorder="0" // This attribute is deprecated, but without it, an ugly white border surrounds my videos
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           referrerPolicy="strict-origin-when-cross-origin" 
-          allowfullscreen
+          allowFullScreen
         ></iframe>
       </div>
     );

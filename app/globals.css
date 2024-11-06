@@ -23,17 +23,8 @@ body {
   padding: 0;
 }
 
-.neonImage {
-  padding: 5px;
-}
-
 .wrapper {
   justify-content: center;
   align-items: center;
   display: flex;
-}
-
-p {
-  color: aliceblue;
-  background-color: turquoise;
 }

@@ -1,10 +1,11 @@
 /*
-    layout.js 
+    layout.js
 
     Overall layout of my app
 */
 
 import './globals.css';
+import Image from 'next/image'
 import SocialDirectry from './Components/SocialMedia/SocialDirectory.js'
 
 export const metadata = {
@@ -16,6 +17,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+            <div className='wrapper'>
+          <Image
+            src='/logo.png'
+            alt='Logo'
+            width={150}
+            height={150}
+          />
+        </div>
         <SocialDirectry />
         {children}
       </body>
