@@ -28,3 +28,17 @@ body {
   align-items: center;
   display: flex;
 }
+
+p {
+  background-color: teal;
+  color: white;
+}
+
+.title1 {
+  font-size: 60px;
+}
+
+.title2 {
+  font-size: 30px;
+  /*Add align to left margin of video*/
+}

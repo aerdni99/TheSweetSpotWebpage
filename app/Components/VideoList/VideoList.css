@@ -4,15 +4,6 @@
     Style sheet for list of music videos
 */
 
-.title1 {
-    font-size: 60px;
-}
-
-.title2 {
-    font-size: 30px;
-    /*Add align to left margin of video*/
-}
-
 .video {
     width: 72vw;
     height: 41vw;
