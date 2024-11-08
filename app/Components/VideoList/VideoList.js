@@ -29,33 +29,33 @@ export default function VideoList() {
 
     return (
         <div>
-            <h1 className='neonGreenText title1 wrapper'>VIDEOS</h1>
+            <h1 className='neonText title1 wrapper'>VIDEOS</h1>
 
-            <h1 className='neonGreenText title2 wrapper'>{titles[0]}</h1>
+            <h1 className='neonText title2 wrapper'>{titles[0]}</h1>
             <EmbeddedVideo
                 url={urls[0]}
                 title={titles[0]}
             />
 
-            <h1 className='neonGreenText title2 wrapper'>{titles[1]}</h1>
+            <h1 className='neonText title2 wrapper'>{titles[1]}</h1>
             <EmbeddedVideo
                 url={urls[1]}
                 title={titles[1]}
             />
 
-            <h1 className='neonGreenText title2 wrapper'>{titles[2]}</h1>
+            <h1 className='neonText title2 wrapper'>{titles[2]}</h1>
             <EmbeddedVideo
                 url={urls[2]}
                 title={titles[2]}
             />
 
-            <h1 className='neonGreenText title2 wrapper'>{titles[3]}</h1>
+            <h1 className='neonText title2 wrapper'>{titles[3]}</h1>
             <EmbeddedVideo
                 url={urls[3]}
                 title={titles[3]}
             />
 
-            <h1 className='neonGreenText title2 wrapper'>{titles[4]}</h1>
+            <h1 className='neonText title2 wrapper'>{titles[4]}</h1>
             <EmbeddedVideo
                 url={urls[4]}
                 title={titles[4]}
