@@ -11,29 +11,14 @@
 
 "use client"
 
+import dynamic from 'next/dynamic';
+
+const BandsInTownWidget = dynamic(() => import('./eventWidget.js'), { ssr: false });
+
 export default function ShowList() {
     return (
         <div>
-            <script 
-                charset="utf-8"   
-                src="https://widget.bandsintown.com/main.min.js">
-            </script>
-            <a 
-                class="bit-widget-initializer" 
-                data-artist-name="Thundercat" 
-                data-display-local-dates="true" 
-                data-display-past-dates="false" 
-                data-auto-style="false" 
-                data-text-color="#FFFFFF" 
-                data-link-color="#12e887" 
-                data-background-color="rgba(0,0,0,0)" 
-                data-display-limit="10" 
-                data-link-text-color="#FFFFFF" 
-                data-display-lineup="true" 
-                data-display-play-my-city="true" 
-                data-separator-color="rgba(124,124,124,0.25)"
-                data-display-start-time="true">
-            </a>
+            <BandsInTownWidget />
         </div>
     );
 }
