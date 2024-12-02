@@ -18,7 +18,7 @@ export default function eventWidget() {
         document.body.appendChild(script);
 
         return () => {
-            document.removeChild(script);
+            document.body.removeChild(script);
         };
     }, [])
 
@@ -26,7 +26,7 @@ export default function eventWidget() {
         <div id='bandsintown-events'>
             <a 
                 className="bit-widget-initializer" 
-                data-artist-name="The Sweet Spot" 
+                data-artist-name="id_15567012" 
                 data-display-local-dates="true" 
                 data-display-past-dates="false" 
                 data-auto-style="false" 
