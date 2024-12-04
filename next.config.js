@@ -15,8 +15,5 @@ module.exports = {
       }
       return config;
     },
-    experimental: {
-      appDir: true, // Enable the experimental `app` directory structure
-    },
   };
   
