@@ -37,6 +37,8 @@ export default function BookingInquiry() {
 
     // Asynchronous function for handling the form submission
     const handleSubmit = async (e) => {
+
+        // This makes it so the page does not reload on form submission
         e.preventDefault();
 
         try {
