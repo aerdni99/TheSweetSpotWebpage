@@ -3,6 +3,7 @@
 
     Configuration file for my next.js app. Mainly, this makes it so fast refresh works because I was having a lot of issues with it's default setting not updating my page
 */
+
 module.exports = {
     reactStrictMode: true, // This enables React's Strict Mode
     webpack: (config, { dev }) => {
@@ -13,6 +14,9 @@ module.exports = {
         };
       }
       return config;
+    },
+    experimental: {
+      appDir: true, // Enable the experimental `app` directory structure
     },
   };
   
