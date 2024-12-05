@@ -23,10 +23,10 @@ export async function POST(req) {
         },
       });
 
-      const mailOptions = {
-        from: `"wemsite Contact" <${process.env.EMAIL_USER}`,
-        to: 
-      }
+      // const mailOptions = {
+      //   from: `"wemsite Contact" <${process.env.EMAIL_USER}`,
+      //   to: 
+      // };
 
       console.log('Booking Request Received:', body);
   
