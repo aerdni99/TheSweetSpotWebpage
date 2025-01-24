@@ -2,6 +2,7 @@
     BookingInquiry.css
 
     Component for band booking inquiries
+    @TODO hook up Maddie's email instead of my own
 */
 
 'use client';
