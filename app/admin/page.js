@@ -4,7 +4,17 @@
     Default landing page for administrative functions for The Sweet Spot webpage
 */
 
-export default function AdminPage() {
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../lib/auth.js";
+import { redirect } from "next/navigation";
+
+export default async function AdminPage() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/admin/login");
+  }
+
   return (
     <div>
       <h1>WE HAVE A VALID SESSION!!</h1>

@@ -1,5 +1,5 @@
 /*
-    layout.js
+    app/layout.js
 
     Overall layout of my app
 */
