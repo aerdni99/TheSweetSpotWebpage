@@ -5,8 +5,6 @@
     creating a separate login page because nextauth is hard to debug and I need to start from scratch and have a better handle on this login authentication process
 */
 
-"use client";
-
 export default function adminLogin() {
     return (
         <div>

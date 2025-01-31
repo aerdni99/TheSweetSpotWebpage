@@ -5,8 +5,6 @@
     This also allows me to make session providers wrap only the admin page instead of the entire application.
 */
 
-"use client";
-
 import { SessionProvider } from "next-auth/react";
 
 export default function AdminLayout({ children }) {

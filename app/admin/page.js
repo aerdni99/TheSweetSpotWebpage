@@ -4,27 +4,6 @@
     Default landing page for administrative functions for The Sweet Spot webpage
 */
 
-"use client";
-
-import { getSession } from 'next-auth/react';
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      retirect: {
-        destination: '/admin/login',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: { session },
-  };
-}
-
 export default function AdminPage() {
   return (
     <div>
