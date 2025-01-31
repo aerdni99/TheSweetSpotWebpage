@@ -6,20 +6,26 @@
 
 "use client";
 
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { getSession } from 'next-auth/react';
 
-export default function AdminPage() {
-  const { data: session } = useSession();
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
 
   if (!session) {
-    return (
-      <div>
-        <h1>WE DO NOT HAVE A VALID SESSION!!</h1>
-        {/* <button onClick={() => signIn()}>Sign In</button> */}
-      </div>
-    );
+    return {
+      retirect: {
+        destination: '/admin/login',
+        permanent: false,
+      },
+    };
   }
 
+  return {
+    props: { session },
+  };
+}
+
+export default function AdminPage() {
   return (
     <div>
       <h1>WE HAVE A VALID SESSION!!</h1>
