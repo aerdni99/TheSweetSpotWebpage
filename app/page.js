@@ -10,6 +10,7 @@ import PhotoAlbum from './Components/PhotoAlbum/PhotoAlbum.js'
 import VideoList from './Components/VideoList/VideoList.js'
 import ShowList from './Components/UpcomingShows/ShowList.js'
 import BookingInquiry from './Components/BookingInquiry/BookingInquiry.js';
+import AboutSection from './Components/AboutSection/AboutSection.js';
 
 
 export default function HomePage() {
@@ -17,6 +18,7 @@ export default function HomePage() {
     return (
     <div>
         <PhotoAlbum />
+        <AboutSection />
         <ShowList />
         <BookingInquiry />
         <VideoList/>
