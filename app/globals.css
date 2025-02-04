@@ -4,6 +4,8 @@
     Styles to be used throughout the webpage
 */
 
+@import "tailwindcss";
+
 .neonText {
     color: #fff;
     text-shadow:
