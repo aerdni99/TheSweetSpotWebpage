@@ -29,11 +29,6 @@ body {
   display: flex;
 }
 
-p {
-  background-color: teal;
-  color: white;
-}
-
 .title1 {
   font-size: 60px;
 }

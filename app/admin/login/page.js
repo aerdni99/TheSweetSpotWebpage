@@ -7,7 +7,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -15,9 +15,15 @@ export default function adminLogin() {
     const router = useRouter();
     const [credentials, setCredentials] = useState({ username: "", password: "" });
     const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleChange = useCallback((e) => {
+        setCredentials((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }, []);
 
     async function handleSubmit(e) {
         e.preventDefault();
+        setIsLoading(true);
 
         const result = await signIn("credentials", {
             redirect: false,
@@ -27,6 +33,7 @@ export default function adminLogin() {
 
         if (result?.error) {
             setError("Invalid username or password");
+            setIsLoading(false);
         } else {
             router.push("/admin");
         }
@@ -35,23 +42,25 @@ export default function adminLogin() {
     return (
         <div>
             <h1 className='neonText'>Login</h1>
-            {error && <p className="text-red-500">{error}</p>}
+            {error && <p className="neonText">{error}</p>}
             <form onSubmit={handleSubmit} className="neonText">
                 <input
                     type="text"
+                    name="username"
                     placeholder="Username"
                     value={credentials.username}
-                    onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
+                    onChange={handleChange}
                     className = ""
                 />
                 <input
                     type="password"
+                    name="password"
                     placeholder="Password"
                     value={credentials.password}
-                    onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+                    onChange={handleChange}
                     className=""
                 />
-                <button type="submit" className="">Login</button>
+                <button type="submit" disabled={isLoading} className="">{isLoading ? "Logging in..." : "Login"}</button>
             </form>
         </div>
     );

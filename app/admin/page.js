@@ -13,15 +13,14 @@ export default async function AdminPage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
+    console.log("Admin logging out...");
     redirect("/admin/login");
   }
 
   return (
     <div>
-      <h1>WE HAVE A VALID SESSION!!</h1>
+      <h1 className="neonText">Admin Page</h1>
       <LogoutButton />
-      {/* <h1>Welcome, {session.user.name}</h1> */}
-      {/* <button onClick={() => signOut()}>Sign Out</button> */}
       {/* Add your admin controls here */}
     </div>
   );

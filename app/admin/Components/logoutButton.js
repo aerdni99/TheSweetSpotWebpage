@@ -7,9 +7,20 @@
 "use client";
 
 import { signOut } from "next-auth/react";
+import { useState } from "react";
 
 export default function LogoutButton() {
+    const [isLoading, setIsLoading] = useState(false);
+
+    function logOut() {
+        setIsLoading(true);
+        signOut({ callbackUrl: "/" });
+    }
+
+
     return (
-        <button onClick={() => signOut({ callbackUrl: "/" })} className="">Log Out</button>
+        <button onClick={logOut} disabled={isLoading} className="">{isLoading ? "Logging Out..." : "Log Out"}</button>
     )
+
+
 }
