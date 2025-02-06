@@ -5,7 +5,7 @@
 */
 
 .neonImage {
-    width: clamp(64px, 3vw, 100px);
+    width: clamp(80px, 3vw, 100px);
     aspect-ratio: 1 / 1;
     transition: transform 0.3s ease;
 }
