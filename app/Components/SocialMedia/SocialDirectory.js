@@ -7,11 +7,10 @@
 'use client';
 
 import SocialButton from './SocialButton.js'
-import './Socials.css'
 
 export default function SocialDirectory() {
     return (
-        <div className="navBar">
+        <div className="flex bg-[#212121] justify-center items-center">
             <SocialButton path='/socials/facebook.svg' link='https://www.facebook.com/indreband/' alt='Facebook' />
             <SocialButton path='/socials/instagram.svg' link='https://www.instagram.com/thesweetspot_band/' alt='Instagram' />
             <SocialButton path='/socials/spotify.svg' link='https://open.spotify.com/artist/1zGfVEcjrkEJUvCqbzKgV2' alt='Spotify' />
