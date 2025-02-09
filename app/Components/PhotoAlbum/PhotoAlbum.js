@@ -13,44 +13,51 @@ export default function PhotoAlbum() {
     '/band/chalk-clap.jpg',
     '/band/bro-sis.jpg',
     '/band/ball-above.jpg',
+    '/band/chalk-clap-2.jpg',
     '/band/cocktails.jpg',
     '/band/chalk-logo.jpg',
-    '/band/bro-sis-2.jpg',
-    '/band/chalk-clap-2.jpg'
+    '/band/bro-sis-2.jpg'
   ];
 
-  const IMAGE_WIDTH = 357; // example width of each image
-  const PADDING = 4; // example padding
-
-  // Initial positions
-  const imagePositions = useRef(
-    imgPaths.map((_, index) => index * (IMAGE_WIDTH + PADDING)) // Space images out by their index
-  );
-
-  const [position, setPosition] = useState(0); // The position of the whole photo album
   const isDragging = useRef(false);
-  const startX = useRef(0);
+  const imageWidth = useRef(0);
+  const padding = useRef(0);
+  const totalWidth = useRef(0);
   const lastX = useRef(0);
-  const lastTime = useRef(0);
+  const [imagePositions, setImagePositions] = useState([]);
+
+  useEffect(() => {
+    imageWidth.current = 19 * window.innerWidth / 100;
+    padding.current = 0.5 * window.innerWidth / 100;
+    totalWidth.current = imgPaths.length * (imageWidth + padding);
+    const initialPositions = imgPaths.map((_, index) => index * (imageWidth.current + padding.current));
+    setImagePositions(initialPositions);
+  }, []);
 
   const handleMouseDown = (e) => {
     isDragging.current = true;
-    startX.current = e.clientX;
     lastX.current = e.clientX;
-    lastTime.current = Date.now();
   };
 
-  const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
+const handleMouseMove = (e) => {
+  if (!isDragging.current) return;
 
-    const deltaX = e.clientX - lastX.current;
-    const deltaTime = Date.now() - lastTime.current;
+  const deltaX = e.clientX - lastX.current;
+  lastX.current = e.clientX;
 
-    setPosition((prev) => prev + deltaX);
+  // Move all images based on drag
+  setImagePositions((prevPositions) => {
+    const newPositions = prevPositions.map((pos) => pos + deltaX);
 
-    lastX.current = e.clientX;
-    lastTime.current = Date.now();
-  };
+    // Check for out-of-bounds images
+    return newPositions.map((pos) => {
+      if (pos < -imageWidth.current) return pos + totalWidth.current; // Loop left to right
+      if (pos > totalWidth.current - imageWidth.current) return pos - totalWidth.current; // Loop right to left
+      return pos;
+    });
+  });
+}
+
 
   const handleMouseUp = () => {
     isDragging.current = false;
@@ -58,24 +65,28 @@ export default function PhotoAlbum() {
 
   return (
     <div
-      className="overflow-hidden w-screen"
+      className="relative min-h-[20vw] overflow-hidden w-full"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      draggable="false"
     >
       <div
         className="flex"
-        style={{ transform: `translateX(${position}px)` }} // Translate the whole album container
+        draggable="false"
       >
         {imgPaths.map((src, i) => (
           <img
             key={i}
             src={src}
             draggable="false"
+            className="select-none"
             style={{
-              width: `${IMAGE_WIDTH}px`,
-              padding: `4px`,
-              transform: `translateX(${imagePositions.current[i]}px)` // Position each image relative to its index
+              position: "absolute",
+              transform: `translateX(${imagePositions[i]}px)`,
+              width: `19vw`,
+              padding: `0.5vw`,
             }}
           />
         ))}
@@ -83,100 +94,3 @@ export default function PhotoAlbum() {
     </div>
   );
 }
-
-/*
-
-import { useState, useRef, useEffect } from "react";
-
-export default function PhotoAlbum() {
-
-    const imgPaths = [
-        '/band/chalk-clap.jpg',
-        '/band/bro-sis.jpg',
-        '/band/ball-above.jpg',
-        '/band/cocktails.jpg',
-        '/band/chalk-logo.jpg',
-        '/band/bro-sis-2.jpg',
-        '/band/chalk-clap-2.jpg'
-    ];
-
-    const MAX_MOMENTUM = 20;
-    const MAX_POSITION = 1000;
-
-    const [position, setPosition] = useState(0);
-    const [velocity, setVelocity] = useState(0);
-    const isDragging = useRef(false);
-    const startX = useRef(0);
-    const lastX = useRef(0);
-    const lastTime = useRef(0);
-
-    const handleMouseDown = (e) => {
-        isDragging.current = true;
-        startX.current = e.clientX;
-        lastX.current = e.clientX;
-        lastTime.current = Date.now();
-    };
-
-    const handleMouseMove = (e) => {
-        if (!isDragging.current) return;
-
-        const deltaX = e.clientX - lastX.current;
-        const deltaTime = Date.now() - lastTime.current;
-        setVelocity(deltaX / deltaTime);
-
-        setPosition((prev) => prev + deltaX);
-        lastX.current = e.clientX;
-        lastTime.current = Date.now();
-    };
-    
-    const handleMouseUp = () => {
-        isDragging.current = false;
-        applyMomentum();
-    };
-  
-    const applyMomentum = () => {
-        let momentum = velocity * 100;
-        momentum = Math.min(Math.max(momentum, -MAX_MOMENTUM), MAX_MOMENTUM);
-    
-        let previousMomentum = momentum;
-    
-        let interval = setInterval(() => {
-            setPosition((prev) => {
-                const newPos = prev + momentum;
-                momentum *= 0.95;
-    
-                // Detect if we're at the end or beginning of the carousel
-                if (newPos >= MAX_POSITION) {
-                    setPosition(-MAX_POSITION); // Reset to beginning
-                } else if (newPos <= -MAX_POSITION) {
-                    setPosition(MAX_POSITION); // Reset to end
-                }
-    
-                // Stop when momentum is below a threshold
-                if (Math.abs(momentum) < 0.5) clearInterval(interval);
-    
-                return newPos;
-            });
-        }, 16);
-    };
-
-    return (
-        <div 
-            className="overflow-hidden w-screen"
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-        >
-            <div 
-                className="flex w-[125vw]"
-                style={{ transform: `translateX(${position}px)` }}
-            >
-                {imgPaths.map((src, i) => (
-                <img key={i} src={src} className="w-[calc(125vw/7)] p-2" draggable="false" />
-                ))}
-            </div>
-        </div>
-    );
-}
-
-*/
