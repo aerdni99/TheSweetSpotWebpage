@@ -29,7 +29,7 @@ export default function PhotoAlbum() {
   useEffect(() => {
     imageWidth.current = 19 * window.innerWidth / 100;
     padding.current = 0.5 * window.innerWidth / 100;
-    totalWidth.current = imgPaths.length * (imageWidth + padding);
+    totalWidth.current = imgPaths.length * (imageWidth.current + padding.current);
     const initialPositions = imgPaths.map((_, index) => index * (imageWidth.current + padding.current));
     setImagePositions(initialPositions);
   }, []);
@@ -63,13 +63,17 @@ const handleMouseMove = (e) => {
     isDragging.current = false;
   };
 
+  const handleMouseLeave = () => {
+    isDragging.current = false;
+  }
+
   return (
     <div
       className="relative min-h-[20vw] overflow-hidden w-full"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
       draggable="false"
     >
       <div
