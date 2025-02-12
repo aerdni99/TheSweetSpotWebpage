@@ -7,7 +7,6 @@
 'use client';
 
 import EmbeddedVideo from './EmbeddedVideo';
-import './VideoList.css'
 
 export default function VideoList() {
 
