@@ -1,7 +1,7 @@
 /*
     postcss.config.mjs
 
-    Config file for tailwind!
+    Config file for Tailwind.css!
 */
 
 const config = {
@@ -9,4 +9,5 @@ const config = {
       "@tailwindcss/postcss": {},
     },
   };
-export default config;
+  export default config;
+  
