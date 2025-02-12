@@ -8,7 +8,6 @@
 'use client';
 
 import { useState } from 'react';
-import './BookingInquiry.css'
 
 export default function BookingInquiry() {
 
@@ -66,8 +65,8 @@ export default function BookingInquiry() {
     return (
         <div>
             <h1 className='neonText wrapper'>Submit A Booking Request</h1>
-            <form onSubmit={handleSubmit}>
-                <label className='neonText'>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto">
+                <label className='flex flex-col neonText'>
                     Name:
                     <input
                     type="text"
@@ -75,10 +74,11 @@ export default function BookingInquiry() {
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    className="p-2 text-lg border rounded-md"
                     />
                 </label>
 
-                <label className='neonText'>
+                <label className='flex flex-col neonText'>
                     Email:
                     <input
                     type="email"
@@ -86,27 +86,23 @@ export default function BookingInquiry() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    className="p-2 text-lg border rounded-md"
                     />
                 </label>
 
-                <label className='neonText'>
+                <label className='flex flex-col neonText'>
                     Message:
                     <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    className="p-2 text-lg border rounded-md"
                     />
                 </label>
 
-                <button type="submit">Send Request</button>
+                <button type="submit" className="p-3 bg-pink-400 text-white rounded-md hover:bg-pink-6000 transition">Send Request</button>
             </form>
         </div>
     );
 }
-
-/*
-
-
-
-*/

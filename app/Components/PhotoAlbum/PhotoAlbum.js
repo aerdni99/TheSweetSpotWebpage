@@ -27,6 +27,7 @@ export default function PhotoAlbum() {
   const [imagePositions, setImagePositions] = useState([]);
 
   useEffect(() => {
+    // Initialize dynamic screen-dependent vars
     imageWidth.current = 19 * window.innerWidth / 100;
     padding.current = 0.5 * window.innerWidth / 100;
     totalWidth.current = imgPaths.length * (imageWidth.current + padding.current);
@@ -61,7 +62,7 @@ const handleMouseMove = (e) => {
 
   const handleMouseUp = () => {
     isDragging.current = false;
-  };
+  }
 
   const handleMouseLeave = () => {
     isDragging.current = false;
