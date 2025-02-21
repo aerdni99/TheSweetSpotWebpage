@@ -36,11 +36,13 @@ export default function PhotoAlbum() {
   }, []);
 
   const handleMouseDown = (e) => {
+    e.preventDefault();
     isDragging.current = true;
     lastX.current = e.clientX;
   };
 
 const handleMouseMove = (e) => {
+  e.preventDefault();
   if (!isDragging.current) return;
 
   const deltaX = e.clientX - lastX.current;
@@ -60,11 +62,13 @@ const handleMouseMove = (e) => {
 }
 
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e) => {
+    e.preventDefault();
     isDragging.current = false;
   }
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (e) => {
+    e.preventDefault();
     isDragging.current = false;
   }
 
@@ -75,11 +79,9 @@ const handleMouseMove = (e) => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
-      draggable="false"
     >
       <div
         className="flex"
-        draggable="false"
       >
         {imgPaths.map((src, i) => (
           <img
