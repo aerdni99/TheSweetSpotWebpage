@@ -1,5 +1,5 @@
 # TheSweetSpotWebpage
-Information page for my band "The Sweet Spot" We make indie rock music, I play keys and sing some backup, I also made the webpage. \
+Information page for my band "The Sweet Spot" We make indie rock music, I play keys and sing some backup, I also made the webpage.
 
 ### The webpage has:
 - Icon button links to our social media

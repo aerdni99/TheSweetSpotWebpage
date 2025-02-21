@@ -2,9 +2,19 @@
     globals.css
 
     Styles to be used throughout the webpage
+
+    This is the cheat sheet for tailwind's default theme variables, I figureed it would be helpful to keep it on hand here for now since I'm new to tailwindcss
+    https://tailwindcss.com/docs/theme#default-theme-variable-reference
 */
 
-@import "tailwind.css";
+
+@import "tailwindcss";
+
+@theme {
+  --shadow-neon: 0 25px 50px -12px rgb(255, 13, 240 / 0.25);
+  --color-red-950: oklch(0.258 0.092 26.042);
+  --shadow-2xl: 0 25px 50px -12px rgb(255 13 255 / 0.25);
+}
 
 .neonText {
     color: #fff;
