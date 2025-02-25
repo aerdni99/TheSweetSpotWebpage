@@ -11,6 +11,7 @@
 @import "tailwindcss";
 
 .neonText {
+    font-family: 'Tilt Neon', sans-serif;
     color: #fff;
     text-shadow:
       0 0 7px #faa,

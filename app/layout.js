@@ -19,6 +19,9 @@ export default function RootLayout({ children }) {
       <head>
         <title>The Sweet Spot</title>
         <link rel="icon" href="/favicon.png" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet" />
       </head>
       <body>
             <div className='flex justify-center'>
@@ -27,7 +30,6 @@ export default function RootLayout({ children }) {
             alt='Logo'
             width={150}
             height={150}
-            className=""
           />
         </div>
         <SocialDirectry />
