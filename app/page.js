@@ -6,27 +6,21 @@
 */
 
 import './globals.css';
-import PhotoAlbum from './Components/PhotoAlbum/PhotoAlbum.js';
-import VideoList from './Components/VideoList/VideoList.js';
-import ShowList from './Components/UpcomingShows/ShowList.js';
-import BookingInquiry from './Components/BookingInquiry/BookingInquiry.js';
-import AboutSection from './Components/AboutSection/AboutSection.js';
-import path from 'path';
-import fs from 'fs';
-
+import PhotoAlbum from '../Components/PhotoAlbum/PhotoAlbum.js';
+import RecentVideo from '../Components/RecentVideo/RecentVideo.js';
+import ShowList from '../Components/UpcomingShows/ShowList.js';
+import BookingInquiry from '../Components/BookingInquiry/BookingInquiry.js';
+// import AboutSection from '../Components/AboutSection/AboutSection.js';
 
 export default function HomePage() {
     
-    const filePath = path.join(process.cwd(), 'public', 'bio.txt');
-    const bio = fs.readFileSync(filePath, 'utf-8');
-
     return (
     <div>
         <PhotoAlbum />
-        <AboutSection bio={bio} />
+        {/* <AboutSection /> */}
         <ShowList />
         <BookingInquiry />
-        <VideoList/>
+        <RecentVideo />
     </div>
     );
 }

@@ -10,12 +10,6 @@
 
 @import "tailwindcss";
 
-@theme {
-  --shadow-neon: 0 25px 50px -12px rgb(255, 13, 240 / 0.25);
-  --color-red-950: oklch(0.258 0.092 26.042);
-  --shadow-2xl: 0 25px 50px -12px rgb(255 13 255 / 0.25);
-}
-
 .neonText {
     color: #fff;
     text-shadow:
@@ -33,19 +27,4 @@ body {
   background-color: #101010;
   margin: 0;
   padding: 0;
-}
-
-.wrapper {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-.title1 {
-  font-size: 60px;
-}
-
-.title2 {
-  font-size: 30px;
-  /*Add align to left margin of video*/
 }

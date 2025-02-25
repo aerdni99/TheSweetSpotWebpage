@@ -6,7 +6,7 @@
 
 import './globals.css';
 import Image from 'next/image'
-import SocialDirectry from './Components/SocialMedia/SocialDirectory.js'
+import SocialDirectry from '../Components/SocialMedia/SocialDirectory.js'
 
 export const metadata = {
   title: 'Next.js',
@@ -21,12 +21,13 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.png" />
       </head>
       <body>
-            <div className='wrapper'>
+            <div className='flex justify-center'>
           <Image
             src='/logo.png'
             alt='Logo'
             width={150}
             height={150}
+            className=""
           />
         </div>
         <SocialDirectry />

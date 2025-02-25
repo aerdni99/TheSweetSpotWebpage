@@ -8,9 +8,9 @@
 
 export default function EmbeddedVideo({url, title}) {
     return (
-      <div className='wrapper'>
+      <div className="w-[90%] md:w-1/2 mx-auto">
         <iframe
-          className="w-[72vw] h-[41vw]"
+          className="w-full aspect-video"
           src={url} 
           title={title} 
           frameBorder="0" // This attribute is deprecated, but without it, an ugly white border surrounds my videos
