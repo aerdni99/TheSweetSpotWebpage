@@ -9,9 +9,10 @@
 
 
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
 
 .neonText {
-    font-family: 'Tilt Neon', sans-serif;
+    font-family: 'Tilt Neon';
     color: #fff;
     text-shadow:
       0 0 7px #faa,
