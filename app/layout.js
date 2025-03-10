@@ -5,8 +5,8 @@
 */
 
 import './globals.css';
-import Image from 'next/image'
-import SocialDirectry from '../Components/SocialMedia/SocialDirectory.js'
+import Header from '../Components/Header/Header.js'
+import Footer from '../Components/Footer/Footer.js'
 
 export const metadata = {
   title: 'Next.js',
@@ -24,19 +24,12 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet" />
       </head>
       <body>
-        <div className=''>
-          <div className='flex justify-center'>
-            <Image
-              src='/logo.png'
-              alt='Logo'
-              width={150}
-              height={150}
-            />
-          </div>
-          <SocialDirectry />
+        <div>
+          <Header />
           {children}
+          <Footer />
         </div>
       </body>
     </html>
-  )
+  );
 }
