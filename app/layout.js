@@ -20,20 +20,22 @@ export default function RootLayout({ children }) {
         <title>The Sweet Spot</title>
         <link rel="icon" href="/favicon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap" rel="stylesheet" />
       </head>
       <body>
-            <div className='flex justify-center'>
-          <Image
-            src='/logo.png'
-            alt='Logo'
-            width={150}
-            height={150}
-          />
+        <div className=''>
+          <div className='flex justify-center'>
+            <Image
+              src='/logo.png'
+              alt='Logo'
+              width={150}
+              height={150}
+            />
+          </div>
+          <SocialDirectry />
+          {children}
         </div>
-        <SocialDirectry />
-        {children}
       </body>
     </html>
   )

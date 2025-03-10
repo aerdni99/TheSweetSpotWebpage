@@ -16,7 +16,7 @@ export default function RecentVideo() {
 
     return (
         <div>
-            <h1 className='neonText'>{ TITLE }</h1>
+        <h1 className='neonText text-4xl text-center p-10'>{ TITLE }</h1>
             <EmbeddedVideo
                             url={ URL }
                             title={ TITLE }

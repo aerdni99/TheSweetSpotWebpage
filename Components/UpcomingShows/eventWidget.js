@@ -24,6 +24,7 @@ export default function eventWidget() {
 
     return (
         <div id='bandsintown-events'>
+            <h1 className='text-center text-4xl p-10 neonText'>Upcoming Shows</h1>
             <a 
                 className="bit-widget-initializer" 
                 data-artist-name="id_15567012" 
