@@ -9,7 +9,7 @@ import SocialDirectry from '../SocialMedia/SocialDirectory.js';
 
 export default function Header() {
     return (
-        <div>
+        <div className='mb-15'>
             <div className='flex justify-center'>
                 <Image
                 src='/logo.png'

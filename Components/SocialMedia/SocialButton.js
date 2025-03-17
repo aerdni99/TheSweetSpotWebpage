@@ -13,7 +13,7 @@ export default function SocialButton({path, link, alt}) {
         <div>
           <Link href={link} target="_blank" rel="noopener noreferrer">
             <img
-              className='w-80px aspect-square transition-transform duration-300 ease-in-out hover:scale-110'
+              className='aspect-square transition-transform duration-300 ease-in-out hover:scale-110'
               src={path}
               alt={alt}
             />

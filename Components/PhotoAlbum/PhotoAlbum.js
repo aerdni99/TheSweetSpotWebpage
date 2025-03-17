@@ -22,17 +22,36 @@ export default function PhotoAlbum() {
   const isDragging = useRef(false);
   const imageWidth = useRef(0);
   const padding = useRef(0);
-  const totalWidth = useRef(0);
+  const albumWidth = useRef(0);
   const lastX = useRef(0);
   const [imagePositions, setImagePositions] = useState([]);
+  const resizeTimer = useRef(null);
 
-  useEffect(() => {
-    // Initialize dynamic screen-dependent vars
+  function buildAlbum() {
     imageWidth.current = 19 * window.innerWidth / 100;
     padding.current = 0.5 * window.innerWidth / 100;
-    totalWidth.current = imgPaths.length * (imageWidth.current + padding.current);
+    albumWidth.current = imgPaths.length * (imageWidth.current + padding.current);
     const initialPositions = imgPaths.map((_, index) => index * (imageWidth.current + padding.current));
     setImagePositions(initialPositions);
+  }
+
+  useEffect(() => {
+    buildAlbum();
+
+    const handleResize = () => {
+      clearTimeout(resizeTimer.current);
+      resizeTimer.current = setTimeout (() => {
+        buildAlbum();
+      }, 100);
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearTimeout(resizeTimer.current)
+      window.removeEventListener("resize", handleResize);
+    };
+
   }, []);
 
   const handleMouseDown = (e) => {
@@ -54,8 +73,8 @@ const handleMouseMove = (e) => {
 
     // Check for out-of-bounds images
     return newPositions.map((pos) => {
-      if (pos < -imageWidth.current) return pos + totalWidth.current; // Loop left to right
-      if (pos > totalWidth.current - imageWidth.current) return pos - totalWidth.current; // Loop right to left
+      if (pos < -imageWidth.current) return pos + albumWidth.current; // Loop left to right
+      if (pos > albumWidth.current - imageWidth.current) return pos - albumWidth.current; // Loop right to left
       return pos;
     });
   });
@@ -74,15 +93,12 @@ const handleMouseMove = (e) => {
 
   return (
     <div
-      className="relative min-h-[20vw] overflow-hidden w-full"
+      className="relative min-h-[20vw] overflow-hidden w-full flex"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
     >
-      <div
-        className="flex"
-      >
         {imgPaths.map((src, i) => (
           <img
             key={i}
@@ -97,7 +113,6 @@ const handleMouseMove = (e) => {
             }}
           />
         ))}
-      </div>
     </div>
   );
 }
