@@ -63,7 +63,7 @@ export default function BookingInquiry() {
         };
 
     return (
-        <div>
+        <div className="mb-10">
             <h1 className='text-center text-4xl p-10 neonText'>Submit A Booking Request</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-sm mx-auto">
                 <label className='flex flex-col neonText'>

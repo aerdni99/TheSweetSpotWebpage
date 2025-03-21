@@ -23,12 +23,12 @@ export default function Splash() {
                 zIndex:`-2`,
                 }}
             />
-            <div style={{ position: "absolute", zIndex: "-1", width: "100vw", top: "50px"}}>
+            <div style={{ position: "absolute", zIndex: "2", width: "100vw", top: "50px"}}>
                 <div className="border-b-2 border-t-2 border-pink-200" style={{ backdropFilter: "blur(2px)", backgroundColor: 'rgba(0, 0, 0, 0.6' }}>
                     <div className="mx-10">
                         <SocialDirectory 
                             align="justify-end" 
-                            size={25}
+                            size={60}
                         />
                     </div>
                 </div>

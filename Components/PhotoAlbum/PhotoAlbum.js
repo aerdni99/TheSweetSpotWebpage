@@ -92,27 +92,30 @@ const handleMouseMove = (e) => {
   }
 
   return (
-    <div
-      className="relative min-h-[20vw] overflow-hidden w-full flex"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-    >
-        {imgPaths.map((src, i) => (
-          <img
-            key={i}
-            src={src}
-            draggable="false"
-            className="select-none"
-            style={{
-              position: "absolute",
-              transform: `translateX(${imagePositions[i]}px)`,
-              width: `19vw`,
-              padding: `0.5vw`,
-            }}
-          />
-        ))}
+    <div>
+        <h1 className='neonText text-4xl text-center p-10'>Photo Album</h1>
+        <div
+        className="relative min-h-[20vw] overflow-hidden w-full flex mb-10 cursor-grab"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+      >
+          {imgPaths.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              draggable="false"
+              className="select-none"
+              style={{
+                position: "absolute",
+                transform: `translateX(${imagePositions[i]}px)`,
+                width: `19vw`,
+                padding: `0.5vw`,
+              }}
+            />
+          ))}
+      </div>
     </div>
   );
 }

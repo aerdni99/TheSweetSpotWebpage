@@ -28,14 +28,14 @@ export default function SocialDirectory({ align, size }) {
     }
     if (!size || size < 1) {
         console.log("Invalid parameter in <SocialDirectory /> \"size\"");
-        size = 25;
+        size = 100;
     }
     return (
         <div className={`flex ${align}`}>
-            <SocialButton path='/socials/facebook.svg' link='https://www.facebook.com/indreband/' alt='Facebook' />
-            <SocialButton path='/socials/instagram.svg' link='https://www.instagram.com/thesweetspot_band/' alt='Instagram' />
-            <SocialButton path='/socials/spotify.svg' link='https://open.spotify.com/artist/1zGfVEcjrkEJUvCqbzKgV2' alt='Spotify' />
-            <SocialButton path='/socials/youtube.svg' link='https://www.youtube.com/@thesweetspotband' alt='Youtube' />
+            <SocialButton path='/socials/facebook.svg' link='https://www.facebook.com/indreband/' alt='Facebook' size={size} />
+            <SocialButton path='/socials/instagram.svg' link='https://www.instagram.com/thesweetspot_band/' alt='Instagram' size={size} />
+            <SocialButton path='/socials/spotify.svg' link='https://open.spotify.com/artist/1zGfVEcjrkEJUvCqbzKgV2' alt='Spotify' size={size} />
+            <SocialButton path='/socials/youtube.svg' link='https://www.youtube.com/@thesweetspotband' alt='Youtube' size={size} />
         </div>
     );
 }
