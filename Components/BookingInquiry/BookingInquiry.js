@@ -101,7 +101,7 @@ export default function BookingInquiry() {
                     />
                 </label>
 
-                <button type="submit" className="p-3 bg-pink-400 text-white rounded-md hover:bg-pink-500 transition">Send Request</button>
+                <button type="submit" className="neonText p-3 bg-pink-400 text-white rounded-md hover:bg-pink-500 transition">Send Request</button>
             </form>
         </div>
     );

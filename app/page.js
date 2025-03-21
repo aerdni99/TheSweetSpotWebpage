@@ -12,6 +12,7 @@ import ShowList from '../Components/UpcomingShows/ShowList.js';
 import BookingInquiry from '../Components/BookingInquiry/BookingInquiry.js';
 import Splash from "../Components/Splash/Splash.js"
 import Header from "../Components/Header/Header.js"
+import Footer from "../Components/Footer/Footer.js"
 // import AboutSection from '../Components/AboutSection/AboutSection.js';
 
 export default function HomePage() {
@@ -19,12 +20,13 @@ export default function HomePage() {
     return (
     <div>
         <Splash />
-        <Header />
-        <PhotoAlbum />
+        {/* <Header /> */}
         {/* <AboutSection /> */}
         <ShowList />
         <BookingInquiry />
         <RecentVideo />
+        <PhotoAlbum />
+        <Footer />
     </div>
     );
 }
