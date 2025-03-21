@@ -17,7 +17,7 @@ const BandsInTownWidget = dynamic(() => import('./eventWidget.js'), { ssr: false
 
 export default function ShowList() {
     return (
-        <div>
+        <div className="flex justify-center items-center">
             <BandsInTownWidget />
         </div>
     );

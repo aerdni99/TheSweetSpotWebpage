@@ -23,14 +23,14 @@ export default function eventWidget() {
     }, [])
 
     return (
-        <div id='bandsintown-events'>
+        <div className="w-3/4" id='bandsintown-events'>
             <h1 className='text-center text-4xl p-10 neonText'>Upcoming Shows</h1>
             <a 
                 className="bit-widget-initializer" 
                 data-artist-name="id_15567012" 
                 data-display-local-dates="true" 
                 data-display-past-dates="false" 
-                data-auto-style="false" 
+                data-auto-style="true" 
                 data-text-color="#FFFFFF" 
                 data-link-color="#12e887" 
                 data-background-color="rgba(0,0,0,0)" 

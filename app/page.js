@@ -10,12 +10,16 @@ import PhotoAlbum from '../Components/PhotoAlbum/PhotoAlbum.js';
 import RecentVideo from '../Components/RecentVideo/RecentVideo.js';
 import ShowList from '../Components/UpcomingShows/ShowList.js';
 import BookingInquiry from '../Components/BookingInquiry/BookingInquiry.js';
+import Splash from "../Components/Splash/Splash.js"
+import Header from "../Components/Header/Header.js"
 // import AboutSection from '../Components/AboutSection/AboutSection.js';
 
 export default function HomePage() {
     
     return (
     <div>
+        <Splash />
+        <Header />
         <PhotoAlbum />
         {/* <AboutSection /> */}
         <ShowList />
