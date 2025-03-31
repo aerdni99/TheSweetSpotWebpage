@@ -14,11 +14,10 @@ export default function Splash() {
             <img
                 src={"/band/splash.jpg"}
                 draggable="false"
-                className="select-none"
+                className="select-none h-[100vh] max-sm:h-[60vh]"
                 style={{
                 position:"absolute",
                 width:"100vw",
-                height:"100vh",
                 objectFit:"cover",
                 zIndex:`-2`,
                 }}

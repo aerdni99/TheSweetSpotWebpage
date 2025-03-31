@@ -31,7 +31,7 @@ export default function SocialDirectory({ align, size }) {
         size = 100;
     }
     return (
-        <div className={`flex ${align}`}>
+        <div className={`flex ${align} max-sm:justify-center`}>
             <SocialButton path='/socials/facebook.svg' link='https://www.facebook.com/indreband/' alt='Facebook' size={size} />
             <SocialButton path='/socials/instagram.svg' link='https://www.instagram.com/thesweetspot_band/' alt='Instagram' size={size} />
             <SocialButton path='/socials/spotify.svg' link='https://open.spotify.com/artist/1zGfVEcjrkEJUvCqbzKgV2' alt='Spotify' size={size} />
