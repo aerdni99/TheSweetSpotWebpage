@@ -11,7 +11,7 @@ export default function Footer() {
         <div>
             <div className="mt-15 mb-15">
                 <div className="">
-                    <SocialDirectory />
+                    <SocialDirectory size={40} />
                 </div>
                 <div className="flex justify-center mt-5">
                     <a className="neonText" href="/privacy-policy">Privacy Policy</a>

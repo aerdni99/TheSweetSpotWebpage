@@ -32,14 +32,12 @@ export default function Splash() {
                 </div>
                 
             </div>
-            <div className="flex items-center justify-center w-full h-[100vh]">
+            <div className="flex items-center justify-center w-full h-[100vh] max-sm:h-[60vh]">
                 <img
                 src='/logo.png'
                 alt='Logo'
-                width={470}
-                height={470}
                 draggable="false"
-                className="select-none drop-shadow-[16px_16px_40px_rgba(0,0,0,0.9)]"
+                className="select-none drop-shadow-[16px_16px_40px_rgba(0,0,0,0.9)] w-[650px] h-[650px] max-sm:w-[250px] max-sm:h-[250px]"
                 />
             </div>
         </div>
