@@ -11,8 +11,8 @@ import RecentVideo from '../Components/RecentVideo/RecentVideo.js';
 import ShowList from '../Components/UpcomingShows/ShowList.js';
 import BookingInquiry from '../Components/BookingInquiry/BookingInquiry.js';
 import Splash from "../Components/Splash/Splash.js"
-import Header from "../Components/Header/Header.js"
 import Footer from "../Components/Footer/Footer.js"
+import MailingList from '../Components/Mailing List/MailingList.js';
 // import AboutSection from '../Components/AboutSection/AboutSection.js';
 
 export default function HomePage() {
@@ -24,6 +24,7 @@ export default function HomePage() {
         {/* <AboutSection /> */}
         <ShowList />
         <BookingInquiry />
+        <MailingList />
         <RecentVideo />
         <PhotoAlbum />
         <Footer />
