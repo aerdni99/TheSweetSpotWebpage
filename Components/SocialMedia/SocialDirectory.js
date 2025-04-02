@@ -23,7 +23,7 @@ export default function SocialDirectory({ alignRight, size }) {
     let align = "";
 
     if (!size || size < 1) {
-        console.log("Invalid parameter in <SocialDirectory /> \"size\"");
+        console.log("Invalid parameter in <SocialDirectory /> \"size\"\nUsing default value: 100");
         size = 100;
     }
     if (alignRight) {
@@ -31,6 +31,7 @@ export default function SocialDirectory({ alignRight, size }) {
     } else {
         align = "justify-center";
     }
+
     return (
         <div className="border-b-2 border-t-2 border-pink-200">
             <div className={`flex ${align} max-sm:justify-center max-sm:pr-0`}>

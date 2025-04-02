@@ -27,6 +27,7 @@ export default function Splash() {
                         <SocialDirectory 
                             alignRight={ true }
                             size={60}
+                            sizeSM={50}
                         />
                     </div>
                 </div>

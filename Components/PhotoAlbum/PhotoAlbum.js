@@ -93,9 +93,8 @@ const handleMouseMove = (e) => {
 
   return (
     <div>
-        <h1 className='neonText text-4xl text-center p-10'>Photo Album</h1>
         <div
-        className="relative min-h-[20vw] overflow-hidden w-full flex mb-10 cursor-grab"
+        className="relative min-h-[20vw] overflow-hidden w-full flex cursor-grab"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
