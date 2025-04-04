@@ -11,10 +11,26 @@ import { useState } from "react";
 export default function MailingList() {
     const [email, setEmail] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Email submitted: ", email);
-    }
+        console.log("Submitted: ", email);
+        const response = await fetch('/api/mailing', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert('Email added successfully');
+        } else {
+            alert('Error adding email');
+        }
+    };
+
     return (
         <div className="flex flex-col items-center drop-shadow-[0_0_10px_#f7e] neonText" style={{ backgroundColor: '#332929' }}>
             <form 
