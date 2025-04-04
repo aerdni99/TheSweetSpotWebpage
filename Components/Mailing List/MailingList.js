@@ -7,6 +7,7 @@
 "use client";
 
 import { useState } from "react";
+import supabase from "./supabase";
 
 export default function MailingList() {
     const [email, setEmail] = useState("");
