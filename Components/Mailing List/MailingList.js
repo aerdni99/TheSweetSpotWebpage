@@ -27,7 +27,7 @@ export default function MailingList() {
         if (data.success) {
             alert('Email added successfully');
         } else {
-            alert(`Error adding email ${JSON.stringify(data)}`);
+            alert(data.error);
         }
     };
 

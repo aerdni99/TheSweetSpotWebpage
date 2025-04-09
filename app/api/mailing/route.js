@@ -32,8 +32,11 @@ export async function POST(req) {
             status: 200,
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: error.message || 'Failed to add email' }), {
-            status: 500,
-        });
+        if (error.code === '23505') {
+            return new Response(
+                JSON.stringify({ error: 'This email is already in use. Please use a different one.' }),
+                { status: 400 }
+            );
+        }
     }
 }
