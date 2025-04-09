@@ -13,7 +13,7 @@ export default function MailingList() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Submitted: ", email);
+        alert(`Submitted: ${email}`);
         const response = await fetch('/api/mailing', {
             method: 'POST',
             headers: {
@@ -27,14 +27,20 @@ export default function MailingList() {
         if (data.success) {
             alert('Email added successfully');
         } else {
-            alert('Error adding email');
+            alert(`Error adding email ${JSON.stringify(data)}`);
         }
     };
 
+    const doNothing = async (e) => {
+        e.preventDefault();
+        alert("Called Do Nothing");
+    };
+
     return (
+        // <div className="flex neonText justify-center"><p>Test</p></div>
         <div className="flex flex-col items-center drop-shadow-[0_0_10px_#f7e] neonText" style={{ backgroundColor: '#332929' }}>
             <form 
-                onSubmit={ handleSubmit } 
+                onSubmit={ handleSubmit }
                 className="flex flex-col items-center gap-3 p-4 max-w-sm"
             >
                 <h2 className="text-2xl">Join Our Mailing List</h2>

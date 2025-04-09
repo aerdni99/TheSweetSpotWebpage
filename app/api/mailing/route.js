@@ -13,10 +13,10 @@ const supabase = createClient(
 );
 
 export async function POST(req) {
-    const { email } = await req.json;
+    const { email } = await req.json();
 
     if (!email) {
-        return new Response(JSON.stringify({ error: 'Email is required' }), {
+        return new Response(JSON.stringify({ error: 'Email is required.' }), {
             status: 400,
         });
     }
@@ -32,7 +32,7 @@ export async function POST(req) {
             status: 200,
         });
     } catch (error) {
-        return new Response(JSON.stringify({ error: 'Failed to add email' }), {
+        return new Response(JSON.stringify({ error: error.message || 'Failed to add email' }), {
             status: 500,
         });
     }
