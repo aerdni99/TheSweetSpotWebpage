@@ -4,30 +4,35 @@
     Component for the band page's about section
 */
 
+const TITLE = "About Us";
+
 export default function AboutSection({ bio }) {
     return (
         <div>
-            <h1 className="text-center neonText title1">About Us</h1>
-            <p className="text-center neonText">
-            
-                Man Who Loves Rock and Roll: <br />
-                Excuse me miss, I'm looking for a place to lay my head for the evening... <br />
-                its been quite a long day on the road. <br /><br />
+            <h1 className='neonText text-4xl text-center p-4'>{ TITLE }</h1>
+            <div className="mx-[20vw] max-sm:mx-10 border-r-2 border-l-2 border-pink-200 bg-[#1a1a1a] p-6">
+                <div className="mx-5">
+                    <p className="neonText mb-4">
+                
+                        The Sweet Spot is a bold new beginning and comeback for Akron, Ohio sublings Maddie and Angelo Indré.
+                        After their band fell apart last year, Maddie spent the summer touring as a merch girl unsure of her next move regarding her own band.
+                        Days spent on the tour bus sparked inspiration, and a brand new vision was born. Songs started pouring out, and in between tours, she would take them to Angelo, and they would spend hours recording demo after demo.
 
-                Front Desk Lady: <br />
-                You're in luck sir! Well, partially in luck. <br />
-                You see, there isn't much laying down at this establishment. <br />
-                However, you can stay all evening long. <br />
-                In fact, you can stay for the rest of your life!<br />
-                Hope you brought your sleaziest pair of pants and your positive mental attitude.<br />
-                Welcome to the Sweet Spot! <br />
-                Here at the Sweet Spot, we offer 5-star Rock & Roll...<br />
-                ...and not much of anything else. <br /><br />
+                    </p>
+                    <p className="neonText mb-4">
 
-                Man Who Loves Rock and Roll: <br />
-                Where do I put my bags?🤠
+                        When things fall apart, it can be looked at as a stopping point or a chance to create.
+                        A chance to start again and make it exactly how you want it.
+                        This is a new era.
 
-            </p>
+                    </p>
+                    <p className="neonText">
+
+                        Welcome to The Sweet Spot.
+
+                    </p>
+                </div>
+            </div>
         </div>
     );
 }

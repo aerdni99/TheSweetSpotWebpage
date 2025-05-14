@@ -8,10 +8,16 @@ import SocialDirectory from "../SocialMedia/SocialDirectory";
 
 export default function Footer() {
     return (
-        <div className="mt-15 mb-15">
-            <div className="border-b-2 border-t-2 border-pink-200">
-                <SocialDirectory />                
+        <div>
+            <div className="mt-10 mb-15">
+                <div className="">
+                    <SocialDirectory size={100} sizeSM={50}/>
+                </div>
+                <div className="flex justify-center mt-5">
+                    <a className="neonText" href="/privacy-policy">Privacy Policy</a>
+                </div>
             </div>
+            
         </div>
     );
 }

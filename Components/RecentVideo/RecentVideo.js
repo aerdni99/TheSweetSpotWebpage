@@ -8,8 +8,8 @@
 
 import EmbeddedVideo from '../Video/EmbeddedVideo';
 
-const TITLE = "My Riot Music Video";
-const URL = "https://www.youtube.com/embed/YrqWBN_P1sE?si=tPLs9QCvzXxyDxTa";
+const TITLE = "Check Out The I'm Out Music Video!";
+const URL = "https://www.youtube.com/embed/Du7XheaMfZM?si=WOFML6_ptJlWRonn";
 
 
 export default function RecentVideo() {
