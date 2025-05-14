@@ -54,13 +54,13 @@ export default function PhotoAlbum() {
 
   }, []);
 
-  const handleMouseDown = (e) => {
+  const handleDown = (e) => {
     e.preventDefault();
     isDragging.current = true;
     lastX.current = e.clientX;
   };
 
-const handleMouseMove = (e) => {
+const handleMove = (e) => {
   e.preventDefault();
   if (!isDragging.current) return;
 
@@ -81,12 +81,12 @@ const handleMouseMove = (e) => {
 }
 
 
-  const handleMouseUp = (e) => {
+  const handleUp = (e) => {
     e.preventDefault();
     isDragging.current = false;
   }
 
-  const handleMouseLeave = (e) => {
+  const handleLeave = (e) => {
     e.preventDefault();
     isDragging.current = false;
   }
@@ -95,10 +95,15 @@ const handleMouseMove = (e) => {
     <div>
         <div
         className="relative min-h-[20vw] overflow-hidden w-full flex cursor-grab"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseLeave}
+        onMouseDown={handleDown}
+        onMouseMove={handleMove}
+        onMouseUp={handleUp}
+        onMouseLeave={handleLeave}
+        onTouchStart={handleDown}
+        onTouchMove={handleMove}
+        onTouchEnd={handleUp}
+        onTouchCancel={handleUp}
+
       >
           {imgPaths.map((src, i) => (
             <img
