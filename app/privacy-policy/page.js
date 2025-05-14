@@ -7,7 +7,7 @@
 export default function PrivacyPolicy() {
     return (
         <div>
-            <a href="/">
+            <a href="/" style={{ display: 'inline-block' }}>
                 <img
                     src='/logo.png'
                     alt='Logo'
