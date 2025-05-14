@@ -54,18 +54,22 @@ export default function PhotoAlbum() {
 
   }, []);
 
+  function getClientX(e) {
+    return e.touches ? e.touches[0].clientX : e.clientX;
+  }
+
   const handleDown = (e) => {
     e.preventDefault();
     isDragging.current = true;
-    lastX.current = e.clientX;
+    lastX.current = getClientX(e);
   };
 
 const handleMove = (e) => {
   e.preventDefault();
   if (!isDragging.current) return;
 
-  const deltaX = e.clientX - lastX.current;
-  lastX.current = e.clientX;
+  const deltaX = getClientX(e) - lastX.current;
+  lastX.current = getClientX(e);
 
   // Move all images based on drag
   setImagePositions((prevPositions) => {
@@ -91,10 +95,6 @@ const handleMove = (e) => {
     isDragging.current = false;
   }
 
-  const handleTouch = (e) => {
-    e.preventDefault();
-    alert("Touched");
-  }
   return (
     <div>
         <div
@@ -103,7 +103,7 @@ const handleMove = (e) => {
         onMouseMove={handleMove}
         onMouseUp={handleUp}
         onMouseLeave={handleLeave}
-        onTouchStart={handleTouch}
+        onTouchStart={handleDown}
         onTouchMove={handleMove}
         onTouchEnd={handleUp}
         onTouchCancel={handleUp}
