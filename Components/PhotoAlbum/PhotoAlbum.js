@@ -91,6 +91,10 @@ const handleMove = (e) => {
     isDragging.current = false;
   }
 
+  const handleTouch = (e) => {
+    e.preventDefault();
+    alert("Touched");
+  }
   return (
     <div>
         <div
@@ -99,11 +103,10 @@ const handleMove = (e) => {
         onMouseMove={handleMove}
         onMouseUp={handleUp}
         onMouseLeave={handleLeave}
-        onTouchStart={handleDown}
+        onTouchStart={handleTouch}
         onTouchMove={handleMove}
         onTouchEnd={handleUp}
         onTouchCancel={handleUp}
-
       >
           {imgPaths.map((src, i) => (
             <img
