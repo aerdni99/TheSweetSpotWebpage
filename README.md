@@ -1,5 +1,7 @@
 # 🎸 The Sweet Spot — Band Website
 
+[thesweetspot.band](thesweetspot.band)
+
 A dynamic and responsive web experience for my indie rock band, **The Sweet Spot**. I play keys, sing backup vocals, and built this site to help promote our music and connect with fans.
 
 This project is built using modern web technologies and serves as both a public-facing promotional page and a simple admin portal for managing bookings.
