@@ -15,7 +15,17 @@ import Footer from "../Components/Footer/Footer.js"
 // import MailingList from '../Components/Mailing List/MailingList.js';
 // import AboutSection from '../Components/AboutSection/AboutSection.js';
 
+import fs from "fs";
+import path from "path";
+
 export default function HomePage() {
+
+    const albumDir = path.join(process.cwd(), "public/band/album");
+    const imgPaths = fs
+      .readdirSync(albumDir)
+      .map(file => `/band/album/${file}`);
+
+
     
     return (
     <div>
@@ -26,7 +36,7 @@ export default function HomePage() {
         <ShowList />
         <BookingInquiry />
         {/* <MailingList /> */}
-        <PhotoAlbum />
+        <PhotoAlbum imgPaths={imgPaths} />
         <Footer />
     </div>
     );

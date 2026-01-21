@@ -8,16 +8,7 @@
 
 import { useState, useRef, useEffect } from "react";
 
-export default function PhotoAlbum() {
-  const imgPaths = [
-    '/band/chalk-clap.jpg',
-    '/band/bro-sis.jpg',
-    '/band/ball-above.jpg',
-    '/band/chalk-clap-2.jpg',
-    '/band/cocktails.jpg',
-    '/band/chalk-logo.jpg',
-    '/band/bro-sis-2.jpg'
-  ];
+export default function PhotoAlbum({ imgPaths }) {
 
   const isDragging = useRef(false);
   const imageWidth = useRef(0);
@@ -110,7 +101,7 @@ const handleMove = (e) => {
       >
           {imgPaths.map((src, i) => (
             <img
-              key={i}
+              key={src}
               src={src}
               draggable="false"
               className="select-none"
