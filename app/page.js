@@ -15,17 +15,34 @@ import Footer from "../Components/Footer/Footer.js"
 // import MailingList from '../Components/Mailing List/MailingList.js';
 // import AboutSection from '../Components/AboutSection/AboutSection.js';
 
-import fs from "fs";
-import path from "path";
+import { supabase } from "../lib/supabase";
 
-export default function HomePage() {
+export async function getAlbumImages() {
+  const bucketName = "photo-album";
 
-    const albumDir = path.join(process.cwd(), "public/band/album");
-    const imgPaths = fs
-      .readdirSync(albumDir)
-      .map(file => `/band/album/${file}`);
+  const { data, error } = await supabase.storage
+    .from(bucketName)
+    .list("", { limit: 1000 });
 
+  if (error) {
+    console.error("Supabase storage error:", error);
+    return [];
+  }
 
+  return data
+    .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file.name))
+    .map(file => {
+      const { data: publicUrlData } = supabase.storage
+        .from(bucketName)
+        .getPublicUrl(file.name);
+      return publicUrlData.publicUrl;
+    });
+}
+
+export default async function HomePage() {
+
+    console.log("Root folder files:", await supabase.storage.from("photo-album").list("", { limit: 100 }));
+    const imgPaths = await getAlbumImages();
     
     return (
     <div>
