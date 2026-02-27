@@ -140,8 +140,8 @@ const handleMove = (e) => {
               style={{
                 position: "absolute",
                 transform: `translateX(${imagePositions[i]}px)`,
-                width: `24vw`,
                 padding: `.5vw`,
+                height: `40vh`,
               }}
             />
           ))}

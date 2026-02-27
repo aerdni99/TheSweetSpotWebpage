@@ -9,7 +9,7 @@ import './globals.css';
 import PhotoAlbum from '../Components/PhotoAlbum/PhotoAlbum.js';
 import RecentVideo from '../Components/RecentVideo/RecentVideo.js';
 import ShowList from '../Components/UpcomingShows/ShowList.js';
-import BookingInquiry from '../Components/BookingInquiry/BookingInquiry.js';
+// import BookingInquiry from '../Components/BookingInquiry/BookingInquiry.js';
 import Splash from "../Components/Splash/Splash.js"
 import Footer from "../Components/Footer/Footer.js"
 // import MailingList from '../Components/Mailing List/MailingList.js';
@@ -41,7 +41,6 @@ export async function getAlbumImages() {
 
 export default async function HomePage() {
 
-    console.log("Root folder files:", await supabase.storage.from("photo-album").list("", { limit: 100 }));
     const imgPaths = await getAlbumImages();
     
     return (
@@ -51,7 +50,7 @@ export default async function HomePage() {
         {/* <Header /> */}
         {/* <AboutSection /> */}
         <ShowList />
-        <BookingInquiry />
+        {/* <BookingInquiry /> */}
         {/* <MailingList /> */}
         <PhotoAlbum imgPaths={imgPaths} />
         <Footer />
