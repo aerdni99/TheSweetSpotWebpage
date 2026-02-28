@@ -18,30 +18,21 @@ import Footer from "../Components/Footer/Footer.js"
 import { supabase } from "../lib/supabase";
 
 export async function getAlbumImages() {
-  const bucketName = "photo-album";
+  const {data, error } = await supabase
+    .from("Photos")
+    .select("*");
 
-  const { data, error } = await supabase.storage
-    .from(bucketName)
-    .list("", { limit: 1000 });
+    if (error) {
+      console.error("Supabase DB error:", error);
+      return [];
+    }
 
-  if (error) {
-    console.error("Supabase storage error:", error);
-    return [];
-  }
-
-  return data
-    .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file.name))
-    .map(file => {
-      const { data: publicUrlData } = supabase.storage
-        .from(bucketName)
-        .getPublicUrl(file.name);
-      return publicUrlData.publicUrl;
-    });
+    return data;
 }
 
 export default async function HomePage() {
 
-    const imgPaths = await getAlbumImages();
+    const imgs = await getAlbumImages();
     
     return (
     <div>
@@ -52,7 +43,7 @@ export default async function HomePage() {
         <ShowList />
         {/* <BookingInquiry /> */}
         {/* <MailingList /> */}
-        <PhotoAlbum imgPaths={imgPaths} />
+        <PhotoAlbum imgs={imgs || []} />
         <Footer />
     </div>
     );

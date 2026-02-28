@@ -8,37 +8,40 @@
 
 import { useState, useRef, useEffect } from "react";
 
-function shuffleArray(array) {
-  const arr = [...array]; // copy, never mutate props
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
+export default function PhotoAlbum({ imgs }) {
 
-export default function PhotoAlbum({ imgPaths }) {
-
+  //State Vars
   const isDragging = useRef(false);
   const imageWidth = useRef(0);
   const padding = useRef(0);
   const albumWidth = useRef(0);
   const lastX = useRef(0);
-  const [imagePositions, setImagePositions] = useState([]);
   const resizeTimer = useRef(null);
-  const shuffledImgPaths = useRef(shuffleArray(imgPaths));
+  const shuffledImgPaths = useRef([]);
+  const [imagePositions, setImagePositions] = useState([]);
 
-  function buildAlbum() {
+  // Helper Function
+  async function buildAlbum() {
     imageWidth.current = 24 * window.innerWidth / 100;
     padding.current = 0.5 * window.innerWidth / 100;
-    albumWidth.current = imgPaths.length * (imageWidth.current + padding.current);
+    albumWidth.current = shuffledImgPaths.length * (imageWidth.current + padding.current);
     const initialPositions = shuffledImgPaths.current.map(
       (_, index) => index * (imageWidth.current + padding.current)
     );
     setImagePositions(initialPositions);
   }
 
+  // Shuffle images into a separate array
+  // Rebuild album on rerender (window size changes)
   useEffect(() => {
+    if (!imgs || imgs.length === 0) return;
+
+    console.log("imgs arrived:", imgs.length);
+
+    const urls = imgs.map(img => img.URL);
+    const shuffled = [...urls].sort(() => Math.random() - 0.5);
+    shuffledImgPaths.current = shuffled;
+
     buildAlbum();
 
     const handleResize = () => {
@@ -55,8 +58,9 @@ export default function PhotoAlbum({ imgPaths }) {
       window.removeEventListener("resize", handleResize);
     };
 
-  }, []);
+  }, [imgs]);
 
+  // Image animation and looping logic  
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (!isDragging.current) {
@@ -116,6 +120,8 @@ const handleMove = (e) => {
     e.preventDefault();
     isDragging.current = false;
   }
+
+  // console.log(shuffledImgPaths.current);
 
   return (
     <div>
