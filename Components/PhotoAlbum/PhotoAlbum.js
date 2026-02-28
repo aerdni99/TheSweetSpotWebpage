@@ -8,37 +8,36 @@
 
 import { useState, useRef, useEffect } from "react";
 
-function shuffleArray(array) {
-  const arr = [...array]; // copy, never mutate props
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
+export default function PhotoAlbum({ imgs }) {
 
-export default function PhotoAlbum({ imgPaths }) {
-
+  //State Vars
   const isDragging = useRef(false);
-  const imageWidth = useRef(0);
-  const padding = useRef(0);
   const albumWidth = useRef(0);
   const lastX = useRef(0);
-  const [imagePositions, setImagePositions] = useState([]);
   const resizeTimer = useRef(null);
-  const shuffledImgPaths = useRef(shuffleArray(imgPaths));
+  const [imagePositions, setImagePositions] = useState([]);
 
-  function buildAlbum() {
-    imageWidth.current = 24 * window.innerWidth / 100;
-    padding.current = 0.5 * window.innerWidth / 100;
-    albumWidth.current = imgPaths.length * (imageWidth.current + padding.current);
-    const initialPositions = shuffledImgPaths.current.map(
-      (_, index) => index * (imageWidth.current + padding.current)
-    );
+  // Helper Function
+  async function buildAlbum() {
+
+    // For each photo in the album, add the scaled width to the total width of the album, account for padding too. Take note of each image's initial position
+    const initialPositions = [];
+    albumWidth.current = 0;
+
+    for (let i = 0; i < imgs.length; i++) {
+      initialPositions[i] = albumWidth.current;
+      const scalar = window.innerHeight * (3 / 10) / imgs[i].Height;
+      albumWidth.current += scalar * imgs[i].Width;
+      albumWidth.current += 0.5 * window.innerWidth / 100;
+    }
     setImagePositions(initialPositions);
   }
 
+  // Rebuild album on rerender (window size changes)
   useEffect(() => {
+    if (!imgs || imgs.length === 0) return;
+
+    console.log("imgs arrived:", imgs.length);
     buildAlbum();
 
     const handleResize = () => {
@@ -55,8 +54,9 @@ export default function PhotoAlbum({ imgPaths }) {
       window.removeEventListener("resize", handleResize);
     };
 
-  }, []);
+  }, [imgs]);
 
+  // Image animation and looping logic  
   useEffect(() => {
     const intervalId = setInterval(() => {
       if (!isDragging.current) {
@@ -64,9 +64,9 @@ export default function PhotoAlbum({ imgPaths }) {
           const newPositions = prevPositions.map((pos) => pos - 1);
 
           // Check for out-of-bounds images
-          return newPositions.map((pos) => {
-            if (pos < -imageWidth.current) return pos + albumWidth.current; // Loop left to right
-            if (pos > albumWidth.current - imageWidth.current) return pos - albumWidth.current; // Loop right to left
+          return newPositions.map((pos, i) => {
+            if (pos < -imgs[i].Width) return pos + albumWidth.current; // Loop left to right
+            if (pos > albumWidth.current - imgs[i].Width) return pos - albumWidth.current; // Loop right to left
             return pos;
           });
         });
@@ -98,9 +98,9 @@ const handleMove = (e) => {
     const newPositions = prevPositions.map((pos) => pos + deltaX);
 
     // Check for out-of-bounds images
-    return newPositions.map((pos) => {
-      if (pos < -imageWidth.current) return pos + albumWidth.current; // Loop left to right
-      if (pos > albumWidth.current - imageWidth.current) return pos - albumWidth.current; // Loop right to left
+    return newPositions.map((pos, i) => {
+      if (pos < -imgs[i].Width) return pos + albumWidth.current; // Loop left to right
+      if (pos > albumWidth.current - imgs[i].Width) return pos - albumWidth.current; // Loop right to left
       return pos;
     });
   });
@@ -117,10 +117,12 @@ const handleMove = (e) => {
     isDragging.current = false;
   }
 
+  
+
   return (
     <div>
         <div
-        className="relative min-h-[20vw] overflow-hidden w-full flex cursor-grab"
+        className="relative min-h-[30vw] overflow-hidden w-full flex cursor-grab"
         onMouseDown={handleDown}
         onMouseMove={handleMove}
         onMouseUp={handleUp}
@@ -130,18 +132,18 @@ const handleMove = (e) => {
         onTouchEnd={handleUp}
         onTouchCancel={handleUp}
       >
-        {imagePositions.length === shuffledImgPaths.current.length &&
-          shuffledImgPaths.current.map((src, i) => (
+        {imagePositions.length === imgs.length &&
+          imgs.map((imgObj, i) => (
             <img
-              key={src}
-              src={src}
+              key={i}
+              src={imgObj.URL}
               draggable="false"
               className="select-none"
               style={{
                 position: "absolute",
                 transform: `translateX(${imagePositions[i]}px)`,
-                width: `24vw`,
                 padding: `.5vw`,
+                height: `30vh`,
               }}
             />
           ))}

@@ -9,7 +9,7 @@ import './globals.css';
 import PhotoAlbum from '../Components/PhotoAlbum/PhotoAlbum.js';
 import RecentVideo from '../Components/RecentVideo/RecentVideo.js';
 import ShowList from '../Components/UpcomingShows/ShowList.js';
-import BookingInquiry from '../Components/BookingInquiry/BookingInquiry.js';
+// import BookingInquiry from '../Components/BookingInquiry/BookingInquiry.js';
 import Splash from "../Components/Splash/Splash.js"
 import Footer from "../Components/Footer/Footer.js"
 // import MailingList from '../Components/Mailing List/MailingList.js';
@@ -18,43 +18,35 @@ import Footer from "../Components/Footer/Footer.js"
 import { supabase } from "../lib/supabase";
 
 export async function getAlbumImages() {
-  const bucketName = "photo-album";
+  const {data, error } = await supabase
+    .from("Photos")
+    .select("*");
 
-  const { data, error } = await supabase.storage
-    .from(bucketName)
-    .list("", { limit: 1000 });
+    if (error) {
+      console.error("Supabase DB error:", error);
+      return [];
+    }
 
-  if (error) {
-    console.error("Supabase storage error:", error);
-    return [];
-  }
-
-  return data
-    .filter(file => /\.(jpg|jpeg|png|webp)$/i.test(file.name))
-    .map(file => {
-      const { data: publicUrlData } = supabase.storage
-        .from(bucketName)
-        .getPublicUrl(file.name);
-      return publicUrlData.publicUrl;
-    });
+    return data;
 }
 
 export default async function HomePage() {
 
-    console.log("Root folder files:", await supabase.storage.from("photo-album").list("", { limit: 100 }));
-    const imgPaths = await getAlbumImages();
-    
-    return (
-    <div>
-        <Splash />
-        <RecentVideo />
-        {/* <Header /> */}
-        {/* <AboutSection /> */}
-        <ShowList />
-        <BookingInquiry />
-        {/* <MailingList /> */}
-        <PhotoAlbum imgPaths={imgPaths} />
-        <Footer />
-    </div>
-    );
+  // Retrieve images from database and shuffle them
+  const imgs = await getAlbumImages();
+  const shuffledImgs = [...imgs].sort(() => Math.random() - 0.5);
+  
+  return (
+  <div>
+      <Splash />
+      <RecentVideo />
+      {/* <Header /> */}
+      {/* <AboutSection /> */}
+      <ShowList />
+      {/* <BookingInquiry /> */}
+      {/* <MailingList /> */}
+      <PhotoAlbum imgs={shuffledImgs || []} />
+      <Footer />
+  </div>
+  );
 }
