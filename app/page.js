@@ -32,19 +32,21 @@ export async function getAlbumImages() {
 
 export default async function HomePage() {
 
-    const imgs = await getAlbumImages();
-    
-    return (
-    <div>
-        <Splash />
-        <RecentVideo />
-        {/* <Header /> */}
-        {/* <AboutSection /> */}
-        <ShowList />
-        {/* <BookingInquiry /> */}
-        {/* <MailingList /> */}
-        <PhotoAlbum imgs={imgs || []} />
-        <Footer />
-    </div>
-    );
+  // Retrieve images from database and shuffle them
+  const imgs = await getAlbumImages();
+  const shuffledImgs = [...imgs].sort(() => Math.random() - 0.5);
+  
+  return (
+  <div>
+      <Splash />
+      <RecentVideo />
+      {/* <Header /> */}
+      {/* <AboutSection /> */}
+      <ShowList />
+      {/* <BookingInquiry /> */}
+      {/* <MailingList /> */}
+      <PhotoAlbum imgs={shuffledImgs || []} />
+      <Footer />
+  </div>
+  );
 }
