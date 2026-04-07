@@ -7,9 +7,24 @@
 'use client';
 
 import { useState, useRef, useEffect } from "react";
+import ShowSelector from "./ShowSelector";
+
+// Helper Function
+async function buildAlbum(albumWidth, imgs, setImagePositions) {
+  // For each photo in the album, add the scaled width to the total width of the album, account for padding too. Take note of each image's initial position
+  const initialPositions = [];
+  albumWidth.current = 0;
+
+  for (let i = 0; i < imgs.length; i++) {
+    initialPositions[i] = albumWidth.current;
+    const scalar = window.innerHeight * (3 / 10) / imgs[i].Height;
+    albumWidth.current += scalar * imgs[i].Width;
+    albumWidth.current += 1 * window.innerWidth / 100;
+  }
+  setImagePositions(initialPositions);
+}
 
 export default function PhotoAlbum({ imgs }) {
-
   //State Vars
   const isDragging = useRef(false);
   const albumWidth = useRef(0);
@@ -17,33 +32,19 @@ export default function PhotoAlbum({ imgs }) {
   const resizeTimer = useRef(null);
   const [imagePositions, setImagePositions] = useState([]);
 
-  // Helper Function
-  async function buildAlbum() {
-
-    // For each photo in the album, add the scaled width to the total width of the album, account for padding too. Take note of each image's initial position
-    const initialPositions = [];
-    albumWidth.current = 0;
-
-    for (let i = 0; i < imgs.length; i++) {
-      initialPositions[i] = albumWidth.current;
-      const scalar = window.innerHeight * (3 / 10) / imgs[i].Height;
-      albumWidth.current += scalar * imgs[i].Width;
-      albumWidth.current += 0.5 * window.innerWidth / 100;
-    }
-    setImagePositions(initialPositions);
-  }
-
   // Rebuild album on rerender (window size changes)
   useEffect(() => {
+
+    // Don't try to build the album if the database didn't supply images to populate it
     if (!imgs || imgs.length === 0) return;
 
     console.log("imgs arrived:", imgs.length);
-    buildAlbum();
+    buildAlbum(albumWidth, imgs, setImagePositions);
 
     const handleResize = () => {
       clearTimeout(resizeTimer.current);
       resizeTimer.current = setTimeout (() => {
-        buildAlbum();
+        buildAlbum(albumWidth, imgs, setImagePositions);
       }, 100);
     }
 
@@ -121,6 +122,7 @@ const handleMove = (e) => {
 
   return (
     <div>
+      <ShowSelector />
         <div
         className="relative min-h-[30vw] overflow-hidden w-full flex cursor-grab"
         onMouseDown={handleDown}
@@ -142,7 +144,6 @@ const handleMove = (e) => {
               style={{
                 position: "absolute",
                 transform: `translateX(${imagePositions[i]}px)`,
-                padding: `.5vw`,
                 height: `30vh`,
               }}
             />
