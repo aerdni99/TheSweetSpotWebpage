@@ -11,6 +11,7 @@ import { createClient } from "../../utils/supabase/client";
 // This function will need passed a list of shows we've played. It will be a pair of values concatenated
 // Venue + Date. 
 export default function ShowSelector() {
+
     const [open, setOpen] = useState(false);
 
     // This needs to be initialized to a random show we have played before
@@ -27,14 +28,15 @@ export default function ShowSelector() {
         }
         const { incomingData } = await supabase.from('Photos').select(selected);
         setData(incomingData);
+        console.log(selected);
     }
 
     return (
         <div className="relative w-48">
         <h1 className='neonText text-4xl text-center p-4'>Venue Name</h1>
-            <button
+            <button className="bg-white text-black p-2 z-50 relative cursor-pointer"
                 onClick={handleUpdate}>
-
+                    test
                 </button>
         </div>
     )

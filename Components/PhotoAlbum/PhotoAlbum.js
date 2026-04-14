@@ -124,7 +124,7 @@ const handleMove = (e) => {
     <div>
       <ShowSelector />
         <div
-        className="relative min-h-[30vw] overflow-hidden w-full flex cursor-grab"
+        className="relative min-h-[30vh] overflow-hidden w-full flex cursor-grab"
         onMouseDown={handleDown}
         onMouseMove={handleMove}
         onMouseUp={handleUp}
