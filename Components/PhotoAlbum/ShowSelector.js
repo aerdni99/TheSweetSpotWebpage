@@ -6,29 +6,21 @@
 
 "use client";
 import { useState } from "react";
-import { createClient } from "../../utils/supabase/client";
+import { useRouter } from "next/navigation";
+import { useTransition } from "react";
 
 // This function will need passed a list of shows we've played. It will be a pair of values concatenated
 // Venue + Date. 
-export default function ShowSelector() {
+export default function ShowSelector({ venues }) {
 
+    // is the dropdown open or not?
     const [open, setOpen] = useState(false);
 
-    // This needs to be initialized to a random show we have played before
+    // Currently selected venue: This needs to be initialized to a random show we have played before
     const [selected, setSelected] = useState("Britewinter - Cleveland, OH");
 
-    const supabase = createClient();
-    const [data, setData] = useState([]);
-
     const handleUpdate = async () => {
-        if (selected === "Britewinter - Cleveland, OH") {
-            setSelected("The Windsor - Windsor, WI");
-        } else {
-            setSelected("Britewinter - Cleveland, OH");
-        }
-        const { incomingData } = await supabase.from('Photos').select(selected);
-        setData(incomingData);
-        console.log(selected);
+        console.log(venues);
     }
 
     return (

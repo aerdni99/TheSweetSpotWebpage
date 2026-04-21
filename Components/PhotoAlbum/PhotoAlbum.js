@@ -21,6 +21,19 @@ export async function getAlbumImages() {
     return data;
 }
 
+export async function getVenues() {
+  const {data, error } = await supabase
+    .from("Photos")
+    .select("Venue");
+
+    if (error) {
+      console.error("Supabase DB error:", error);
+      return [];
+    }
+
+    return data;
+}
+
 export default async function PhotoAlbum() {
 
   // Retrieve images from database and shuffle them
@@ -29,8 +42,8 @@ export default async function PhotoAlbum() {
 
   return (
     <div>
-      <ShowSelector />
-      <Photos imgs={shuffledImgs || []} />
+      <ShowSelector venues={ getVenues() } />
+      <Photos imgs={ shuffledImgs || [] } />
     </div>
   );
 }
