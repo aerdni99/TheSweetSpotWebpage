@@ -33,7 +33,7 @@ export default function ShowSelector() {
 
     return (
         <div className="relative w-48">
-        <h1 className='neonText text-4xl text-center p-4'>Venue Name</h1>
+        <h1 className='neonText text-m text-center p-4'>{selected}</h1>
             <button className="bg-white text-black p-2 z-50 relative cursor-pointer"
                 onClick={handleUpdate}>
                     test

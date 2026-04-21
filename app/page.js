@@ -15,26 +15,8 @@ import Footer from "../Components/Footer/Footer.js"
 // import MailingList from '../Components/Mailing List/MailingList.js';
 // import AboutSection from '../Components/AboutSection/AboutSection.js';
 
-import { supabase } from "../lib/supabase";
-
-export async function getAlbumImages() {
-  const {data, error } = await supabase
-    .from("Photos")
-    .select("*");
-
-    if (error) {
-      console.error("Supabase DB error:", error);
-      return [];
-    }
-
-    return data;
-}
 
 export default async function HomePage() {
-
-  // Retrieve images from database and shuffle them
-  const imgs = await getAlbumImages();
-  const shuffledImgs = [...imgs].sort(() => Math.random() - 0.5);
   
   return (
   <div>
@@ -45,7 +27,7 @@ export default async function HomePage() {
       <ShowList />
       {/* <BookingInquiry /> */}
       {/* <MailingList /> */}
-      <PhotoAlbum imgs={shuffledImgs || []} />
+      <PhotoAlbum />
       <Footer />
   </div>
   );
