@@ -11,16 +11,17 @@ import { useTransition } from "react";
 
 // This function will need passed a list of shows we've played. It will be a pair of values concatenated
 // Venue + Date. 
-export default function ShowSelector({ venues }) {
+export default function ShowSelector({ venues, onVenueChange }) {
 
     // is the dropdown open or not?
     const [open, setOpen] = useState(false);
 
     // Currently selected venue: This needs to be initialized to a random show we have played before
-    const [selected, setSelected] = useState("Britewinter - Cleveland, OH");
+    const [selected, setSelected] = useState(venues[0]);
 
     const handleUpdate = (e) => {
         setSelected(e.target.value);
+        onVenueChange(selected);
         console.log("New Venue Selected: ", e.target.value);
         e.target.blur();
         return;
