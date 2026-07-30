@@ -25,6 +25,15 @@
       /* 0 0 151px #ff13f0; */
   }
 
+.neon-card {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+    backdrop-filter: blur(10px);    /* The "Glass" effect */
+    border: 1px solid rgba(255, 19, 240, 0.5);
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255, 19, 240, 0.2);
+    transition: all 0.3s ease;
+  }
+
 body {
   background-color: #141414;
   margin: 0;

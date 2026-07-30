@@ -4,150 +4,70 @@
     Component for photo album on the website
 */
 
-'use client';
+"use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
+import ShowSelector from "./ShowSelector.js";
+import Photos from "./Photos.js";
 
-export default function PhotoAlbum({ imgs }) {
+export default function PhotoAlbum() {
+  const [venues, setVenues] = useState([]);
+  const [imgs, setImgs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  //State Vars
-  const isDragging = useRef(false);
-  const albumWidth = useRef(0);
-  const lastX = useRef(0);
-  const resizeTimer = useRef(null);
-  const [imagePositions, setImagePositions] = useState([]);
-
-  // Helper Function
-  async function buildAlbum() {
-
-    // For each photo in the album, add the scaled width to the total width of the album, account for padding too. Take note of each image's initial position
-    const initialPositions = [];
-    albumWidth.current = 0;
-
-    for (let i = 0; i < imgs.length; i++) {
-      initialPositions[i] = albumWidth.current;
-      const scalar = window.innerHeight * (3 / 10) / imgs[i].Height;
-      albumWidth.current += scalar * imgs[i].Width;
-      albumWidth.current += 0.5 * window.innerWidth / 100;
-    }
-    setImagePositions(initialPositions);
-  }
-
-  // Rebuild album on rerender (window size changes)
+  // 1. Fetch the initial list of venues on mount
   useEffect(() => {
-    if (!imgs || imgs.length === 0) return;
+    async function loadInitialData() {
+      try {
+        const venueResponse = await fetch("/api/venues");
+        const venueList = await venueResponse.json();
+        setVenues(venueList);
 
-    console.log("imgs arrived:", imgs.length);
-    buildAlbum();
-
-    const handleResize = () => {
-      clearTimeout(resizeTimer.current);
-      resizeTimer.current = setTimeout (() => {
-        buildAlbum();
-      }, 100);
-    }
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      clearTimeout(resizeTimer.current)
-      window.removeEventListener("resize", handleResize);
-    };
-
-  }, [imgs]);
-
-  // Image animation and looping logic  
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (!isDragging.current) {
-        setImagePositions((prevPositions) => {
-          const newPositions = prevPositions.map((pos) => pos - 1);
-
-          // Check for out-of-bounds images
-          return newPositions.map((pos, i) => {
-            if (pos < -imgs[i].Width) return pos + albumWidth.current; // Loop left to right
-            if (pos > albumWidth.current - imgs[i].Width) return pos - albumWidth.current; // Loop right to left
-            return pos;
-          });
-        });
+        // If there are venues, auto-load the first venue's photos
+        if (venueList.length > 0) {
+          await handleVenueChange(venueList[0]);
+        }
+      } catch (err) {
+        console.error("Error initializing photo album:", err);
+      } finally {
+        setLoading(false);
       }
-    }, 20);
+    }
 
-    return () => clearInterval(intervalId);
+    loadInitialData();
   }, []);
 
-  function getClientX(e) {
-    return e.touches ? e.touches[0].clientX : e.clientX;
-  }
-
-  const handleDown = (e) => {
-    e.preventDefault();
-    isDragging.current = true;
-    lastX.current = getClientX(e);
+  // 2. Callback passed to ShowSelector to trigger updates on user selection
+  const handleVenueChange = async (venueName) => {
+    if (!venueName) return;
+    setLoading(true);
+    
+    try {
+      // Hit our secure API bridge instead of Supabase directly
+      const response = await fetch(`/api/photos?venue=${encodeURIComponent(venueName)}`);
+      const photosData = await response.json();
+      
+      setImgs(Array.isArray(photosData) ? photosData : []);
+    } catch (err) {
+      console.error("Error updating photos for venue:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-const handleMove = (e) => {
-  e.preventDefault();
-  if (!isDragging.current) return;
-
-  const deltaX = getClientX(e) - lastX.current;
-  lastX.current = getClientX(e);
-
-  // Move all images based on drag
-  setImagePositions((prevPositions) => {
-    const newPositions = prevPositions.map((pos) => pos + deltaX);
-
-    // Check for out-of-bounds images
-    return newPositions.map((pos, i) => {
-      if (pos < -imgs[i].Width) return pos + albumWidth.current; // Loop left to right
-      if (pos > albumWidth.current - imgs[i].Width) return pos - albumWidth.current; // Loop right to left
-      return pos;
-    });
-  });
-}
-
-
-  const handleUp = (e) => {
-    e.preventDefault();
-    isDragging.current = false;
-  }
-
-  const handleLeave = (e) => {
-    e.preventDefault();
-    isDragging.current = false;
-  }
-
-  
-
   return (
-    <div>
-        <div
-        className="relative min-h-[30vh] overflow-hidden w-full flex cursor-grab"
-        onMouseDown={handleDown}
-        onMouseMove={handleMove}
-        onMouseUp={handleUp}
-        onMouseLeave={handleLeave}
-        onTouchStart={handleDown}
-        onTouchMove={handleMove}
-        onTouchEnd={handleUp}
-        onTouchCancel={handleUp}
-      >
-        {imagePositions.length === imgs.length &&
-          imgs.map((imgObj, i) => (
-            <img
-              key={i}
-              src={imgObj.URL}
-              draggable="false"
-              className="select-none"
-              style={{
-                position: "absolute",
-                transform: `translateX(${imagePositions[i]}px)`,
-                padding: `.5vw`,
-                height: `30vh`,
-              }}
-            />
-          ))}
-      </div>
+    <div className="space-y-6">
+      <ShowSelector 
+        venues={venues} 
+        onVenueChange={handleVenueChange} 
+      />
+      
+      {loading ? (
+        <div className="text-center py-12 text-zinc-400">Loading gallery...</div>
+      ) : (
+        <Photos imgs={imgs} />
+      )}
     </div>
   );
 }
+ 
