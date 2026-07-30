@@ -20,7 +20,7 @@
 
 'use client';
 
-const STANDARD_LOGGING = true;
+const STANDARD_LOGGING = false;
 
 import { useState, useRef, useEffect } from "react";
 
@@ -148,7 +148,8 @@ export default function Photos({ imgs }) {
           });
         });
       }
-    }, 100);
+    }, 30);
+    // @NOTE: instead of static 30, I could make the interval dynamic and add acceleration physics based on deltaX from the isDragging function, but another day.
 
     return () => clearInterval(intervalId);
   }, []);

@@ -20,12 +20,15 @@ export default function ShowSelector({ venues, onVenueChange }) {
     const [selected, setSelected] = useState(venues[0]);
 
     const handleUpdate = (e) => {
-        setSelected(e.target.value);
-        onVenueChange(selected);
-        console.log("New Venue Selected: ", e.target.value);
+        const newValue = e.target.value;
+        setSelected(newValue);
+        onVenueChange(newValue);
+        console.log("New Venue Selected: ", newValue);
         e.target.blur();
         return;
     }
+
+    console.log(`First Venue: ${venues[0]}`);
 
     return (
         <div className="flex flex-col gap-4 mx-6">
