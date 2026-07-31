@@ -13,6 +13,7 @@ import Photos from "./Photos.js";
 export default function PhotoAlbum() {
   const [venues, setVenues] = useState([]);
   const [imgs, setImgs] = useState([]);
+  const [selectedVenue, setSelectedVenue] = useState("");
   const [loading, setLoading] = useState(true);
 
   // 1. Fetch the initial list of venues on mount
@@ -20,16 +21,20 @@ export default function PhotoAlbum() {
     async function loadInitialData() {
       try {
         const venueResponse = await fetch("/api/venues");
+        if (!venueResponse.ok) throw new Error("Failed to fetch venues");
+
         const venueList = await venueResponse.json();
         setVenues(venueList);
 
         // If there are venues, auto-load the first venue's photos
-        if (venueList.length > 0) {
-          await handleVenueChange(venueList[0]);
+        if (Array.isArray(venueList) && venueList.length > 0) {
+          setSelectedVenue(venueList[0].id);
+        } else {
+          // No venues found
+          setLoading(false);
         }
       } catch (err) {
         console.error("Error initializing photo album:", err);
-      } finally {
         setLoading(false);
       }
     }
@@ -37,29 +42,35 @@ export default function PhotoAlbum() {
     loadInitialData();
   }, []);
 
-  // 2. Callback passed to ShowSelector to trigger updates on user selection
-  const handleVenueChange = async (venueName) => {
-    if (!venueName) return;
-    setLoading(true);
-    
-    try {
-      // Hit our secure API bridge instead of Supabase directly
-      const response = await fetch(`/api/photos?venue=${encodeURIComponent(venueName)}`);
-      const photosData = await response.json();
-      
-      setImgs(Array.isArray(photosData) ? photosData : []);
-    } catch (err) {
-      console.error("Error updating photos for venue:", err);
-    } finally {
-      setLoading(false);
+  // Re-fetch photos when the selected venue changes
+  useEffect(() => {
+    if (!selectedVenue) return;
+
+    async function loadPhotos() {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/photos?showId=${selectedVenue}`);
+        if (!res.ok) throw new Error("Failed to fetch photos");
+
+        const photosData = await res.json();
+        setImgs(Array.isArray(photosData) ? photosData : []);
+      } catch (err) {
+        console.error("error updating photos:", err);
+        setImgs([]);
+      } finally {
+        setLoading(false);
+      }
     }
-  };
+    
+    loadPhotos();
+  }, [selectedVenue]);
 
   return (
     <div className="space-y-6">
       <ShowSelector 
-        venues={venues} 
-        onVenueChange={handleVenueChange} 
+        shows={venues} 
+        selectedShowId={selectedVenue}
+        onShowChange={(showId) => setSelectedVenue(showId)} 
       />
       
       {loading ? (

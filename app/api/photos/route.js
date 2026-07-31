@@ -8,25 +8,25 @@ import { NextResponse } from "next/server";
 import { supabase } from "../../../lib/supabase";
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const venueName = searchParams.get("venue");
-
-  if (!venueName) {
-    return NextResponse.json({ error: "Venue parameter is required" }, { status: 400 });
-  }
-
   try {
+    const { searchParams } = new URL(request.url);
+    const showId = searchParams.get("showId");
+
+    if (!showId) {
+      return NextResponse.json({ error: "Venue parameter is required" }, { status: 400 });
+    }
+
     const { data, error } = await supabase
       .from("Photos")
       .select("*")
-      .eq("Venue", venueName);
+      .eq("show_id", showId);
 
-    if (error) throw error;
+    if (error) {
+      console.error("Supabase Error fetching photos:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
 
-    // Shuffle the array on the server before sending it down to save client CPU cycles
-    const shuffledImgs = [...data].sort(() => Math.random() - 0.5);
-
-    return NextResponse.json(shuffledImgs);
+    return NextResponse.json(data || []);
   } catch (error) {
     console.error("API Error fetching photos:", error);
     return NextResponse.json({ error: "Failed to fetch photos" }, { status: 500 });

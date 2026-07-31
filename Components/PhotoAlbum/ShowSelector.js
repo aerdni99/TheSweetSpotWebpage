@@ -5,47 +5,81 @@
 */
 
 "use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
 
-// This function will need passed a list of shows we've played. It will be a pair of values concatenated
-// Venue + Date. 
-export default function ShowSelector({ venues, onVenueChange }) {
-
-    // is the dropdown open or not?
-    const [open, setOpen] = useState(false);
-
-    // Currently selected venue: This needs to be initialized to a random show we have played before
-    const [selected, setSelected] = useState(venues[0]);
-
-    const handleUpdate = (e) => {
-        const newValue = e.target.value;
-        setSelected(newValue);
-        onVenueChange(newValue);
-        console.log("New Venue Selected: ", newValue);
+export default function ShowSelector({ shows = [], selectedShowId, onShowChange }) {
+    const handleChange = (e) => {
+        const newShowId = e.target.value;
+        onShowChange(newShowId);
+        console.log("Selected Show IDL ", newShowId);
         e.target.blur();
-        return;
-    }
-
-    console.log(`First Venue: ${venues[0]}`);
+    };
 
     return (
         <div className="flex flex-col gap-4 mx-6">
-            <div className="relative w-64">
+            <div className="relative w-72">
                 <select 
-                    value={selected}
-                    onChange={handleUpdate}
+                    value={selectedShowId || ""}
+                    onChange={handleChange}
                     className="neonText w-full text-black p-2 rounded border border-gray-800 cursor-pointer focus:outline-none focus:border-pink-500 focus:shadow-[0_0_15px_3px_#ec4899] transition-all duration-300 hover:border-pink-500 hover:shadow-[0_0_15px_3px_#ec4899]"
                 >
-                    <option className='bg-gray-800' value="" disabled>Select a venue...</option>
-                    {venues.map((venueName, index) => (
-                        <option className='bg-gray-800' key={index} value={venueName}>
-                            {venueName}
-                        </option>
-                    ))}
+                    <option className='bg-gray-800 text-white' value="" disabled>Select a venue...</option>
+                    {shows.map((show) => {
+                        const formattedDate = show.Date ? new Date(show.Date).toLocaleDateString() : "";
+                        const displayLabel = formattedDate ? `${show.Venue} (${formattedDate})` : show.Venue;
+
+                        return (
+                            <option className="bg-gray-800 text-white" key={show.id} value={show.id}>
+                                {displayLabel}
+                            </option>
+                        );
+                    })}
                 </select>
             </div>
         </div>
-    )
+    );
 }
+
+// import { useState } from "react";
+// import { useRouter } from "next/navigation";
+// import { useTransition } from "react";
+
+// // This function will need passed a list of shows we've played. It will be a pair of values concatenated
+// // Venue + Date. 
+// export default function ShowSelector({ venues, onVenueChange }) {
+
+//     // is the dropdown open or not?
+//     const [open, setOpen] = useState(false);
+
+//     // Currently selected venue: This needs to be initialized to a random show we have played before
+//     const [selected, setSelected] = useState(venues[0]);
+
+//     const handleUpdate = (e) => {
+//         const newValue = e.target.value;
+//         setSelected(newValue);
+//         onVenueChange(newValue);
+//         console.log("New Venue Selected: ", newValue);
+//         e.target.blur();
+//         return;
+//     }
+
+//     console.log(`First Venue: ${venues[0]}`);
+
+//     return (
+//         <div className="flex flex-col gap-4 mx-6">
+//             <div className="relative w-64">
+//                 <select 
+//                     value={selected}
+//                     onChange={handleUpdate}
+//                     className="neonText w-full text-black p-2 rounded border border-gray-800 cursor-pointer focus:outline-none focus:border-pink-500 focus:shadow-[0_0_15px_3px_#ec4899] transition-all duration-300 hover:border-pink-500 hover:shadow-[0_0_15px_3px_#ec4899]"
+//                 >
+//                     <option className='bg-gray-800' value="" disabled>Select a venue...</option>
+//                     {venues.map((venueName, index) => (
+//                         <option className='bg-gray-800' key={index} value={venueName}>
+//                             {venueName}
+//                         </option>
+//                     ))}
+//                 </select>
+//             </div>
+//         </div>
+//     )
+// }
